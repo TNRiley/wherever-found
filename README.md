@@ -1,10 +1,10 @@
 # 🦊 Wherever Found
 
-**Every species the Endangered Species Act has ever listed, delisted or reclassified, verified live against the government's own database. Delisted doesn't mean recovered — less than two-thirds of the time it does.**
+**Every species the Endangered Species Act has ever listed, delisted or reclassified, verified live against both agencies' own databases — plus who the money actually goes to. NOAA Fisheries leads 7% of the list and absorbs two-thirds of the spending.**
 
 → **[Open it](https://tnriley.github.io/wherever-found/)**
 
-The Fish and Wildlife Service's ECOSphere database, queried live and merged into one page: 2,478 currently listed entities, 141 ever delisted, 51 dated reclassifications, 965 critical habitat designations and 1,596 five-year status reviews, each linking back to the government's own document. The flagship finding sits in the government's own bookkeeping: of 141 delisted entities, only 85 (60%) were removed because they recovered — 32 went extinct first, and 24 were never validly listed in the first place. The most-listed group of organisms in the country is not an animal: 893 flowering plants outnumber all mammals and birds combined. One species, the gray wolf, is simultaneously endangered, threatened, an experimental population and delisted-as-recovered depending on which state line you're standing next to. A fully searchable explorer covers every entity; a state-by-state map, a critical-habitat ranking topped by the polar bear's 120 million acres, and a spotlight on migratory ocean species NOAA Fisheries manages round it out.
+The Fish and Wildlife Service's ECOSphere database and NOAA Fisheries' own ESA directory, queried live and merged with four years of the spending report Congress is sent: 2,478 currently listed entities, 141 ever delisted, 965 critical habitat designations, 1,596 five-year status reviews, and $734 million of reported FY2022 expenditure parsed out of a PDF that has no machine-readable release. Two findings carry the page. First, of 141 delisted entities only 85 (60%) were removed because they recovered — 32 went extinct first and 24 were never validly listed. Second, NOAA Fisheries leads 167 of 2,478 listing entities and takes 64% of every dollar reported spent, because recovering a Columbia Basin salmon run means operating a hydroelectric system: the three most expensive species in the country are all salmon or steelhead. Alongside them sits the North Atlantic right whale, whose sustainable human-caused death limit is 0.73 animals a year against 14.8 actually killed — one of 15 Atlantic marine mammal stocks dying faster than NOAA's own arithmetic allows. A searchable explorer covers every entity with its spending history; a second table covers NOAA's 105 species with their recovery-plan status, global NatureServe rank and live Federal Register document counts; and a state choropleth, a critical-habitat ranking and a live rulemaking feed round it out.
 
 ## Running it
 
@@ -25,14 +25,18 @@ The full build pipeline is in [`src/`](src/), with a README describing how to re
 ## Data
 
 - **[U.S. Fish & Wildlife Service, ECOSphere (Environmental Conservation Online System) — species listings, delistings, reclassifications, five-year reviews, critical habitat and recovery plans, fetched live at build time via undocumented report endpoints](https://ecos.fws.gov/ecp/)** — US Government public domain
-- **[NOAA Fisheries, ESA Species Directory (marine and anadromous species jurisdiction, cross-checked against FWS's own agency field)](https://www.fisheries.noaa.gov/species-directory/threatened-endangered)** — US Government public domain
+- **[NOAA Fisheries, ESA Species Directory — the agency's own list of the 105 species and 258 listed entities it leads, with region, recovery plan status and critical habitat status, taken from the directory's JSON export](https://www.fisheries.noaa.gov/species-directory/threatened-endangered)** — US Government public domain
+- **[U.S. Fish & Wildlife Service, Federal and State Endangered and Threatened Species Expenditures — Reports to Congress, fiscal years 2019–2022; per-entity spending parsed from Table 2 of each PDF](https://www.fws.gov/library/collections/endangered-and-threatened-species-expenditures-reports)** — US Government public domain
+- **[NOAA Fisheries, 2024 U.S. Atlantic and Gulf of America Marine Mammal Stock Assessments — abundance, Potential Biological Removal and human-caused mortality for 116 stocks, parsed from the report's Table 1](https://www.fisheries.noaa.gov/national/marine-mammal-protection/marine-mammal-stock-assessment-reports)** — US Government public domain
+- **[Office of the Federal Register, Federal Register API — ESA rulemaking counts by agency, type and year, per-species document counts, and a live feed of each agency's most recent filings](https://www.federalregister.gov/developers/documentation/api/v1)** — US Government public domain
+- **[NatureServe Explorer — global (G1–G5) and US national conservation ranks for every NOAA-managed species, via the public species search API](https://explorer.natureserve.org/)** — NatureServe Network Biodiversity Location Data, used under NatureServe's terms for non-commercial reference
 - **[Blank US Map (states only).svg, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Blank_US_Map_(states_only).svg)** — CC0 1.0 Universal (public domain dedication)
 
 Every figure on the page is computed from the data shipped with it. Check the page's own methods panel for how each number is derived and where it should not be pushed.
 
 ## Built with
 
-python 3 stdlib, undocumented ECOS pull-reports REST API, entity_id / scientific-name join with a DPS-label bridge and word-overlap fallback, vanilla JS, canvas timeline, inline SVG choropleth, gzip + base64 payload.
+python 3 stdlib, pypdf, undocumented ECOS pull-reports REST API, NOAA Fisheries species-directory JSON export, self-validating PDF table parsers (reconciled against each report's own printed total), entity_id / scientific-name join with a DPS-label bridge, a taxonomic-synonym bridge and word-overlap fallbacks, vanilla JS, canvas timeline, inline SVG choropleth, gzip + base64 payload.
 
 ## Licence
 

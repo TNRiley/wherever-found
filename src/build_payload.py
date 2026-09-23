@@ -18,6 +18,8 @@ import unicodedata
 from collections import defaultdict
 from pathlib import Path
 
+import merge_noaa
+
 RAW = Path(__file__).parent / "raw"
 OUT = Path(__file__).parent.parent / "payload.json"
 
@@ -223,6 +225,14 @@ def main():
     print(f"critical habitat attached: {sum(1 for s in species if 'critical_habitat' in s)}")
     print(f"recovery plans attached: {sum(1 for s in species if 'recovery_plans' in s)}")
 
+    # --- NOAA, money, stock assessments, rulemaking, global ranks ------------
+    # Everything above comes from ECOS. Everything merge_noaa.attach returns
+    # comes from somewhere else, and it also decorates the entity records above
+    # with a per-year "spend" figure where the expenditure reports join.
+    print()
+    extras = merge_noaa.attach(species, load)
+    print()
+
     # --- supplementary datasets ----------------------------------------------
     candidate_raw = load("candidate.json")
     candidates = [{
@@ -273,6 +283,7 @@ def main():
         "by_state": by_state,
         "by_group": by_group,
         "boxscore": boxscore,
+        **extras,
     }
 
     OUT.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8", newline="\n")
