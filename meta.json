@@ -1,0 +1,47 @@
+{
+  "slug": "wherever-found",
+  "title": "Wherever Found",
+  "favicon": "🦊",
+  "built": "2026-09-22",
+  "published": false,
+  "tagline": "Every species the Endangered Species Act has ever listed, delisted or reclassified, verified live against the government's own database. Delisted doesn't mean recovered — less than two-thirds of the time it does.",
+  "blurb": "The Fish and Wildlife Service's ECOSphere database, queried live and merged into one page: 2,478 currently listed entities, 141 ever delisted, 51 dated reclassifications, 965 critical habitat designations and 1,596 five-year status reviews, each linking back to the government's own document. The flagship finding sits in the government's own bookkeeping: of 141 delisted entities, only 85 (60%) were removed because they recovered — 32 went extinct first, and 24 were never validly listed in the first place. The most-listed group of organisms in the country is not an animal: 893 flowering plants outnumber all mammals and birds combined. One species, the gray wolf, is simultaneously endangered, threatened, an experimental population and delisted-as-recovered depending on which state line you're standing next to. A fully searchable explorer covers every entity; a state-by-state map, a critical-habitat ranking topped by the polar bear's 120 million acres, and a spotlight on migratory ocean species NOAA Fisheries manages round it out.",
+  "tags": [
+    "endangered species",
+    "conservation",
+    "wildlife",
+    "government data",
+    "public records",
+    "vanilla JS",
+    "canvas",
+    "choropleth map"
+  ],
+  "sources": [
+    {
+      "name": "U.S. Fish & Wildlife Service, ECOSphere (Environmental Conservation Online System) — species listings, delistings, reclassifications, five-year reviews, critical habitat and recovery plans, fetched live at build time via undocumented report endpoints",
+      "url": "https://ecos.fws.gov/ecp/",
+      "licence": "US Government public domain"
+    },
+    {
+      "name": "NOAA Fisheries, ESA Species Directory (marine and anadromous species jurisdiction, cross-checked against FWS's own agency field)",
+      "url": "https://www.fisheries.noaa.gov/species-directory/threatened-endangered",
+      "licence": "US Government public domain"
+    },
+    {
+      "name": "Blank US Map (states only).svg, Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Blank_US_Map_(states_only).svg",
+      "licence": "CC0 1.0 Universal (public domain dedication)"
+    }
+  ],
+  "stack": [
+    "python 3 stdlib",
+    "undocumented ECOS pull-reports REST API",
+    "entity_id / scientific-name join with a DPS-label bridge and word-overlap fallback",
+    "vanilla JS",
+    "canvas timeline",
+    "inline SVG choropleth",
+    "gzip + base64 payload"
+  ],
+  "hasSource": true,
+  "bytes": 468774
+}

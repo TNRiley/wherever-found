@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wherever Found</title>
+<meta name="description" content="Every species the Endangered Species Act has ever listed, delisted or reclassified, verified against the U.S. Fish and Wildlife Service's own live records.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --paper:#F1EEE5; --surface:#F8F6EF; --raise:#FFFFFF; --sunk:#E8E3D6;
+  --ink:#1A1D16; --muted:#5B5E51; --faint:#8C8F80; --line:#D9D4C4; --line-2:#C9C4AF;
+  --accent:#2F6B4F; --accent-soft:#DCEADF; --gold:#B8892B; --gold-soft:#F1E6CC;
+  --c1:#2a78d6; --c2:#eb6834; --c3:#1baf7a; --c4:#eda100; --c5:#e87ba4; --c6:#008300; --c7:#4a3aa7; --c8:#e34948;
+  --shadow:0 1px 2px rgba(26,29,22,.05), 0 14px 40px rgba(26,29,22,.08);
+  --r:16px; --r-sm:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  color-scheme: dark;
+  --paper:#141712; --surface:#1B1F18; --raise:#222620; --sunk:#0E100D;
+  --ink:#EDEBE1; --muted:#A6A897; --faint:#6C6F60; --line:#2C3026; --line-2:#3A3E31;
+  --accent:#57A784; --accent-soft:#1E2E25; --gold:#D4A64A; --gold-soft:#2A2314;
+  --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#3fbf3f; --c7:#9085e9; --c8:#e66767;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 46px rgba(0,0,0,.4);
+}}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --paper:#141712; --surface:#1B1F18; --raise:#222620; --sunk:#0E100D;
+  --ink:#EDEBE1; --muted:#A6A897; --faint:#6C6F60; --line:#2C3026; --line-2:#3A3E31;
+  --accent:#57A784; --accent-soft:#1E2E25; --gold:#D4A64A; --gold-soft:#2A2314;
+  --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#3fbf3f; --c7:#9085e9; --c8:#e66767;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 46px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
+.serif{font-family:"Fraunces","Georgia",serif;}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+a{color:var(--accent)}
+img,svg{max-width:100%}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px;}
+.narrow{max-width:720px;}
+
+/* header / hero */
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);}
+.topbar a{color:var(--faint);text-decoration:none}
+.themebtn{border:1px solid var(--line);background:var(--surface);color:var(--muted);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.hero{padding:26px 0 8px;}
+.hero .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;font-weight:600;}
+h1.title{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(38px,8vw,68px);line-height:.98;letter-spacing:-.02em;margin:0 0 16px;}
+.dek{font-family:"Fraunces",serif;font-size:clamp(17px,2.2vw,21px);font-weight:400;color:var(--muted);max-width:62ch;line-height:1.45;margin:0 0 18px;}
+.byline{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--faint);display:flex;gap:14px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 0;margin-bottom:30px;}
+
+/* stat row */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:36px;}
+.stat{background:var(--surface);padding:18px 16px;}
+.stat .v{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:clamp(20px,3vw,30px);letter-spacing:-.01em;}
+.stat .l{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.3}
+@media (max-width:680px){.stat-row{grid-template-columns:repeat(2,1fr)}}
+
+/* prose */
+.section{margin:56px 0;}
+.section-label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:600;}
+h2.h{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(24px,4vw,34px);letter-spacing:-.01em;margin:0 0 14px;line-height:1.08;}
+h3.h3{font-family:"Fraunces",serif;font-weight:600;font-size:19px;margin:26px 0 8px;}
+p.body{font-size:16px;max-width:70ch;margin:0 0 15px;}
+p.body .fig{font-family:"IBM Plex Mono",monospace;color:var(--ink);font-weight:600;}
+.callout{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--r-sm);padding:16px 18px;margin:18px 0;font-size:15px;}
+.callout.gold{border-left-color:var(--gold)}
+.note{font-size:13px;color:var(--muted);}
+
+/* card grid */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:18px 0;}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px 16px;}
+.card h4{margin:0 0 4px;font-family:"Fraunces",serif;font-size:16px;font-weight:600;}
+.card .sn{font-style:italic;color:var(--muted);font-size:12.5px;display:block;margin-bottom:8px;}
+.card .row{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-top:3px;}
+.card .row b{color:var(--ink);font-weight:600;}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.04em;padding:2px 8px;border-radius:20px;font-weight:600;}
+
+/* bar lists */
+.barlist{margin:16px 0;}
+.barlist .row{display:grid;grid-template-columns:180px 1fr 90px;align-items:center;gap:10px;padding:6px 0;font-size:13.5px;}
+.barlist .row .lab{color:var(--muted);}
+.barlist .row .track{background:var(--sunk);border-radius:5px;height:16px;position:relative;overflow:hidden;}
+.barlist .row .fill{height:100%;border-radius:5px 0 0 5px;}
+.barlist .row .n{font-family:"IBM Plex Mono",monospace;text-align:right;font-weight:600;}
+@media (max-width:600px){.barlist .row{grid-template-columns:110px 1fr 60px;font-size:12px;}}
+
+/* timeline canvas */
+.chart-box{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin:18px 0;position:relative;}
+canvas{display:block;width:100%;}
+.chart-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:10px;}
+.chart-legend .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;}
+.tooltip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-family:"IBM Plex Mono",monospace;font-size:11.5px;padding:6px 9px;border-radius:6px;white-space:nowrap;opacity:0;transition:opacity .08s;z-index:5;}
+:root[data-theme="dark"] .tooltip, @media (prefers-color-scheme:dark){.tooltip{background:var(--raise);color:var(--ink);border:1px solid var(--line)}}
+
+/* map */
+.map-wrap{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;}
+.map-svg{flex:1 1 460px;min-width:280px;}
+.map-svg path{stroke:var(--paper);stroke-width:1.2;cursor:pointer;transition:opacity .1s}
+.map-svg path:hover{opacity:.75}
+.map-scale{display:flex;align-items:center;gap:4px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);margin-top:10px;}
+.map-scale .sw{width:24px;height:12px;border-radius:2px;}
+.territory-list{flex:1 1 220px;font-size:13px;}
+.territory-list .row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--line);}
+
+/* delist reasons */
+.reason-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0;}
+.reason-card{border:1px solid var(--line);border-radius:var(--r-sm);padding:16px;background:var(--surface);}
+.reason-card .n{font-family:"IBM Plex Mono",monospace;font-size:30px;font-weight:600;}
+.reason-card .t{font-size:13px;color:var(--muted);margin-top:4px;}
+.reason-card .ex{font-size:12px;color:var(--faint);margin-top:10px;line-height:1.4;}
+@media (max-width:640px){.reason-grid{grid-template-columns:1fr;}}
+
+/* reclass list */
+.recl-row{display:grid;grid-template-columns:90px 20px 1fr 70px;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px;}
+.recl-row .dir{font-weight:700;}
+.recl-row .sn{font-style:italic;color:var(--muted);font-size:12px;}
+.recl-row .st{font-family:"IBM Plex Mono",monospace;font-size:11px;text-align:right;color:var(--muted);}
+
+/* explorer */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0;position:sticky;top:0;background:var(--paper);padding:10px 0;z-index:3;}
+.filters input[type=text],.filters select{font-family:"Archivo",sans-serif;font-size:13px;padding:8px 10px;border:1px solid var(--line-2);border-radius:8px;background:var(--raise);color:var(--ink);}
+.filters input[type=text]{flex:1 1 200px;}
+.count-readout{font-size:12.5px;color:var(--muted);margin:6px 0 10px;font-family:"IBM Plex Mono",monospace;}
+table.explorer{width:100%;border-collapse:collapse;font-size:13.5px;}
+table.explorer thead th{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);text-align:left;padding:8px 8px;border-bottom:1px solid var(--line-2);cursor:pointer;user-select:none;white-space:nowrap;}
+table.explorer thead th:hover{color:var(--ink)}
+table.explorer tbody tr.r{border-bottom:1px solid var(--line);cursor:pointer;}
+table.explorer tbody tr.r:hover{background:var(--surface);}
+table.explorer td{padding:8px 8px;vertical-align:top;}
+table.explorer td.sn{font-style:italic;color:var(--muted);}
+tr.detail td{background:var(--surface);padding:0;}
+.detail-inner{padding:14px 18px 20px;font-size:13.5px;}
+.detail-inner .kv{display:grid;grid-template-columns:140px 1fr;gap:6px 12px;margin-bottom:10px;}
+.detail-inner .kv b{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;}
+.detail-inner ul{margin:4px 0 10px;padding-left:18px;}
+.detail-inner li{margin-bottom:4px;}
+.show-more{display:block;margin:16px auto;padding:9px 18px;border:1px solid var(--line-2);border-radius:20px;background:var(--surface);cursor:pointer;font:600 13px "Archivo",sans-serif;}
+
+footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 60px;font-size:12.5px;color:var(--muted);}
+footer a{color:var(--muted)}
+footer .src{margin-bottom:4px;}
+.loading{padding:80px 0;text-align:center;color:var(--muted);font-family:"IBM Plex Mono",monospace;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span>Quick Projects</span>
+  <button class="themebtn" id="themebtn" title="Toggle theme">&#9680;</button>
+</div>
+
+<div class="wrap">
+
+<div class="hero">
+  <div class="eyebrow">Endangered Species Act &middot; United States</div>
+  <h1 class="title serif">Wherever Found</h1>
+  <p class="dek">Every species the Endangered Species Act has ever listed, delisted or reclassified &mdash; pulled straight from the U.S. Fish and Wildlife Service's own live records, not a summary of them.</p>
+  <div class="byline">
+    <span>Built <span id="built-date">&mdash;</span></span>
+    <span>&middot;</span>
+    <span>Source: <a href="https://ecos.fws.gov/ecp/" target="_blank" rel="noopener">FWS ECOS</a> &amp; <a href="https://www.fisheries.noaa.gov/species-directory/threatened-endangered" target="_blank" rel="noopener">NOAA Fisheries</a></span>
+    <span>&middot;</span>
+    <span><a href="#methodology">Methods &amp; limits</a></span>
+  </div>
+</div>
+
+<div class="stat-row" id="stat-row">
+  <div class="loading">loading live FWS data&hellip;</div>
+</div>
+
+<div id="app" style="display:none">
+
+<section class="section narrow">
+  <p class="body">The Endangered Species Act became law on December 28, 1973, the culmination of a decade of growing alarm about species disappearing faster than anyone could count them. It does one specific thing: it lets two federal agencies &mdash; the Fish and Wildlife Service for everything on land and in fresh water, NOAA Fisheries for everything in the ocean and migrating through it &mdash; add a species, subspecies or distinct population to a legal list, after which harming it, trading it or destroying the habitat it depends on becomes a federal offense.</p>
+  <p class="body">This page is that list, kept current against the government's own database rather than a news summary of it. It is not built to alarm. Most of what follows is procedural: paperwork, dates, review cycles, and the occasional very large number. The interesting part is what the paperwork itself reveals once you can see all of it at once &mdash; including that "removed from the list" is not the same thing as "recovered," that the most-listed group of organisms in the country is not an animal at all, and that one species has been legally endangered, threatened, experimental and delisted-as-recovered <em>at the same time</em>, in different states.</p>
+</section>
+
+<section class="section" id="sec-timeline">
+  <div class="section-label">Since 1973</div>
+  <h2 class="h serif">A list that grows in bursts, not a line</h2>
+  <p class="body">Every bar is a calendar year; its height is how many of today's 2,619 tracked listing entities &mdash; entries in the Fish and Wildlife Service's Endangered Species database, current and historical &mdash; were first listed that year, whether or not they are still on the list today. The tallest years are not evenly spaced: a single day, June 2, 1970, added 248 species at once &mdash; almost entirely foreign mammals, birds and reptiles listed under the Act's 1969 predecessor law &mdash; and another single day, June 14, 1976, added 147 more. Those two dates alone outweigh most individual decades of one-at-a-time review that followed.</p>
+  <div class="chart-box">
+    <canvas id="timeline-canvas" height="260"></canvas>
+    <div class="tooltip" id="timeline-tip"></div>
+  </div>
+  <div class="chart-legend"><span><span class="sw" style="background:var(--accent)"></span>species/populations first listed that year</span></div>
+</section>
+
+<section class="section">
+  <div class="section-label">Two words, four categories</div>
+  <h2 class="h serif">What "listed" actually means</h2>
+  <p class="body">The law recognizes two core categories &mdash; <b>endangered</b> (in danger of extinction now) and <b>threatened</b> (likely to become endangered) &mdash; plus two narrower legal constructions: an <b>experimental population</b> released into new territory under relaxed rules to encourage recovery attempts, and a <b>similarity-of-appearance</b> listing, for a species that isn't actually at risk but is protected because it's easily mistaken for one that is.</p>
+  <div class="barlist" id="status-bars"></div>
+</section>
+
+<section class="section" id="sec-delisted">
+  <div class="section-label">The flagship finding</div>
+  <h2 class="h serif">"Delisted" does not mean "recovered"</h2>
+  <p class="body">A species leaves the list for one of three reasons, and the government's own bookkeeping treats all three as the same event: <b>delisted</b>. Only one of those reasons is the good news the word implies.</p>
+  <div class="reason-grid" id="reason-grid"></div>
+  <p class="body">Of the <span class="fig" id="delist-total">&mdash;</span> delisting entities on record, <span class="fig" id="delist-recovery-pct">&mdash;</span> were removed because they actually recovered &mdash; the bald eagle (2007), the Louisiana black bear (2016), the Northern Rocky Mountain gray wolf (2017) among them. <span class="fig" id="delist-extinct-pct">&mdash;</span> were removed because they went extinct first. The rest were never really eligible in the first place: a taxonomic reclassification decided the "species" was actually a hybrid or a duplicate of something else already covered, or new information overturned the original listing decision. Reading a falling delisting count as an environmental success story, without checking which bucket each one fell into, is the trap this page is built to avoid.</p>
+  <div class="callout" id="ibw-callout"></div>
+</section>
+
+<section class="section" id="sec-reclass">
+  <div class="section-label">Up and down</div>
+  <h2 class="h serif">Reclassification: the list can move both ways</h2>
+  <p class="body">A species can also be reclassified without leaving the list at all &mdash; downlisted from endangered to the less severe threatened as it recovers, or uplisted the other way as its situation worsens. Below are the <span class="fig" id="recl-count">&mdash;</span> reclassification events this build could match to a specific listing entity and date.</p>
+  <div id="reclass-list"></div>
+  <h3 class="h3 serif">One wolf, six statuses</h3>
+  <div class="callout gold" id="wolf-callout"></div>
+</section>
+
+<section class="section" id="sec-agency">
+  <div class="section-label">Two agencies, one law</div>
+  <h2 class="h serif">Land, water, and the species that cross the line</h2>
+  <p class="body">The Fish and Wildlife Service leads on almost everything &mdash; mammals, birds, plants, insects, freshwater fish. NOAA Fisheries takes over the moment a species' life happens mostly in salt water: whales, most sea turtles, Pacific salmon runs, reef-building corals, the big migratory sharks. A small number are split between both agencies at once, usually because the species crosses that line itself &mdash; a sea turtle that nests on a beach and swims across an ocean.</p>
+  <div class="barlist" id="agency-bars"></div>
+  <h3 class="h3 serif">Species that don't stay in one country</h3>
+  <p class="body">The Act's reach isn't limited to U.S. soil. It covers foreign species traded across U.S. borders, and highly migratory ocean animals that spend only part of their range in U.S. waters. A sample, pulled live from the same data as everything else on this page:</p>
+  <div class="card-grid" id="migratory-cards"></div>
+</section>
+
+<section class="section" id="sec-map">
+  <div class="section-label">Where they are</div>
+  <h2 class="h serif">Listed species by state</h2>
+  <p class="body">A species with a range spanning ten states is counted in all ten &mdash; this map shows overlap, not a partition of the country. Hawai&#699;i and Puerto Rico, disproportionately high, are why: island endemics evolved nowhere else, with nowhere else to retreat to.</p>
+  <div class="map-wrap">
+    <svg class="map-svg" id="us-map" viewBox="0 0 959 593" xmlns="http://www.w3.org/2000/svg"><path class="al" d="m 643,467.4 .4,-7.3 -.9,-1.2 -1.7,-.7 -2.5,-2.8 .5,-2.9 48.8,-5.1 -.7,-2.2 -1.5,-1.5 -.5,-1.4 .6,-6.3 -2.4,-5.7 .5,-2.6 .3,-3.7 2.2,-3.8 -.2,-1.1 -1.7,-1 v -3.2 l -1.8,-1.9 -2.9,-6.1 -12.9,-45.8 -45.7,4 1.3,2 -1.3,67 4.4,33.2 .9,-.5 1.3,.1 .6,.4 .8,-.1 2,-3.8 v -2.3 l 1.1,-1.1 1.4,.5 3.4,6.4 v .9 l -3.3,2.2 3.5,-.4 4.9,-1.6 z"/><path class="ak" d="m 15.8,572 h 2.4 l .7,.7 -1,1.2 -1.9,.2 -2.5,1.3 -3.7,-.1 2.2,-.9 .3,-1.1 2.5,-.3 z m 8.3,-1.7 1.3,.5 h .9 l .5,1.2 .3,-.6 .9,.2 1.1,1.5 0,.5 -4.2,1.9 -2.4,-.1 -1,-.5 -1.1,.7 -2,0 -1.1,-1.4 4.7,-.5 z m 5.4,-.1 1,.1 .7,.7 v 1 l -1.3,.1 -.9,-1.1 z m 2.5,.3 1.3,-.1 -.1,1 -1.1,.6 z m .3,2.2 3.4,-.1 .2,1.1 -1.3,.1 -.3,-.5 -.8,.6 -.4,-.6 -.9,-.2 z m 166.3,7.6 2.1,.1 -1,1.9 -1.1,-.1 -.4,-.8 .5,-1.3 m -1.1,-2.9 .6,-1.3 -.2,-2.3 2.4,-.5 4.5,4.4 1.3,3.4 1.9,1.6 .3,5.1 -1.4,0 -1.3,-2.3 -3.1,-2.4 h -.6 l 1.1,2.8 1.7,.2 .2,2.1 -.9,.1 -4.1,-4.4 -.1,-.9 1.9,-1 0,-1 -.5,-.8 -1.6,-.6 -1.7,-1.3 1.4,.1 .5,-.4 -.6,-.9 -.6,.5 z m -3.6,-9.1 1.3,.1 2.4,2.5 -.2,.8 -.8,-.1 -.1,1.8 .5,.5 0,1.5 -.8,.3 -.4,1.2 -.8,-.4 -.4,-2.2 1.1,-1.4 -2.1,-2.2 .1,-1.2 z m 1.5,-1.5 1.9,.2 2.5,.1 3.4,3.2 -.2,.5 -1.1,.6 -1.1,-.2 -.1,-.7 -1.2,-1.6 -.3,.7 1,1.3 -.2,1.2 -.8,-.1 -1.3,.2 -.1,-1.7 -2.6,-2.8 z m -12.7,-8.9 .9,-.4 h 1.6 l .7,-.5 4.1,2.2 .1,1.5 -.5,.5 h -.8 l -1.4,-.7 1.1,1.3 1.8,0 .5,2 -.9,0 -2.2,-1.5 -1.1,-.2 .6,1.3 .1,.9 .8,-.6 1.7,1.2 1.3,-.1 -.2,.8 1.9,4.3 0,3.4 .4,2.1 -.8,.3 -1.2,-2 -.5,-1.5 -1.6,-1.6 -.2,-2.7 -.6,-1.7 h -.7 l .3,1.1 0,.5 -1.4,1 .1,-3.3 -1.6,-1.6 -1.3,-2.3 -1.2,-1.2 z m 7.2,-2.3 1.1,1.8 2.4,-.1 1,2.1 -.6,.6 2,3.2 v 1.3 l -1.2,.8 v .7 l -2,1.9 -.5,-1.4 -.1,-1.3 .6,-.7 v -1.1 l -1.5,-1.9 -.5,-3.7 -.9,-1.5 z m -56.7,-18.3 -4,4.1 v 1.6 l 2.1,-.8 .8,-1.9 2.2,-2.4 z m -31.6,16.6 0,.6 1.8,1.2 .2,-1.4 .6,.9 3.5,.1 .7,-.6 .2,-1.8 -.5,-.7 -1.4,0 0,-.8 .4,-.6 v -.4 l -1.5,-.3 -3.3,3.6 z m -8.1,6.2 1.5,5.8 h 2.1 l 2.4,-2.5 .3,1.2 6.3,-4 .7,-1 -1,-1.1 v -.7 l .5,-1.3 -.9,-.1 -2,1 0,-1.2 -2.7,-.6 -2.4,.3 -.2,3.4 -.8,-2 -1.5,-.1 -1,.6 z m -2.2,8.2 .1,-.7 2.1,-1.3 .6,.3 1.3,.2 1.3,1.2 -2.2,-.2 -.4,-.6 -1,.6 z m -5.2,3.3 -1.1,.8 1.5,1.4 .8,-.7 -.1,-1.3 z m -6.3,-7.9 1.4,.1 .4,.6 -1.8,.1 z m -13.9,11.9 v .5 l .7,.1 -.1,-.6 z m -.4,-3.2 -1,1 v .5 l .7,1.1 1,-1 -.7,-.1 z m -2,-.8 -.3,1 -1.3,.1 -.4,.2 0,1.3 -.5,.9 .6,0 .7,-.9 .8,-.1 .9,-1 .2,-1.3 z m -4.4,-2 -.2,1.8 1.4,.8 1.2,-.6 0,-1 1.7,-.3 -.1,-.6 -.9,-.2 -.7,.6 -.9,-.5 z m -4.9,-.1 1,.7 -.3,1.2 -1.4,-1.1 z m -4.2,1.3 1.4,.1 -.7,.8 z m -3.5,3 1.8,1.1 -1.7,.1 z m -25.4,-31.2 1.2,.6 -.8,.6 z m -.7,-6.3 .4,1.2 .8,-1.2 z m 24.3,-19.3 1.5,-.1 .9,.4 1.1,-.5 1.3,-.1 1.6,.8 .8,1.9 -.1,.9 -1.2,2 -2.4,-.2 -2.1,-1.8 -1,-.4 -1.1,-2 z m -21.1,-14.4 .1,1.9 2,2 v .5 l -.8,-.2 -1.7,-.8 -.3,-1.1 -.3,-1.6 z m 18.3,-23.3 v 1.2 l 1.9,1.8 h 2.3 l .6,1.1 v 1.6 l 2.1,1.9 1.8,1.2 -.1,.7 -.7,1.1 -1.4,-1.2 -2.1,.1 -.8,-.8 -.9,-2.1 -1.5,-2.2 -2.6,-.1 -1,-.7 1,-2.1 z m 16.8,-4.5 1,0 .1,1.1 h -1 z m 16.2,19.7 .9,.1 0,1.2 -1.7,-.5 z m 127.8,77.7 -1.2,.4 -.1,1.1 h 1.2 z m -157.6,-4.5 -1.3,-.4 -4.1,.6 -2.8,1.4 -.1,1.9 1.9,.7 1.5,-.9 1.7,-.1 4.7,1.4 .1,-1.3 -1.6,-1.1 z m 2.1,2.3 -.4,-1.4 1.2,.2 .1,1.4 1.8,0 .4,-2.5 .3,2.4 2.5,-.1 3.2,-3.3 .8,.1 -.7,1.3 1.4,.9 4.2,-.2 2.6,-1.2 1.4,-.1 .3,1.5 .6,-.5 .4,-1.4 5.9,.2 1.9,-1.6 -1.3,-1.1 .6,-1.2 2.6,.2 -.2,-1.2 2.5,.2 .7,-1.1 1.1,.2 4.6,-1.9 .2,-1.7 5.6,-2.4 2,-1.9 1.2,-.6 1.3,.8 2.3,-.9 1.1,-1.9 .5,-1.3 1.7,-.9 1.5,-.7 .4,-1.4 -1.1,-1.7 -2.2,-.2 -.2,-1.3 .8,-1.6 1.4,-.2 1.3,-1.5 1.9,-.1 3.4,-3.2 .4,-1.4 1.5,-2.3 3.8,-4.1 2.5,-.9 1.9,-.9 2.1,.8 1.4,2.6 -1.5,0 -1.4,-1.5 -3,2 -1.7,.1 -.2,3.1 -3.1,4.9 .6,2 2.3,0 -.6,1 -1.4,.1 -2.4,1.8 0,.9 1.9,1 3.4,-.6 1.4,-1.7 1.4,.1 3,-1.7 .5,-2.3 1.6,-.1 6.3,.8 1,-1.1 1,-4.5 -1.6,1.1 .6,-2.2 -1.6,-1.4 .8,-1.5 .1,1.5 3.4,0 .7,-1 1.6,-.1 -.3,1.7 1.9,.1 -1.9,1.3 4.1,1.1 -3.5,.4 -1.3,1.2 .9,1.4 4.6,-1.7 2.3,1.7 .7,-.9 .6,1.4 4,2.3 h 2.9 l 3.9,-.5 4.3,1.1 2,1.9 4.5,.4 1.8,-1.5 .8,2.4 -1.8,.7 1.2,1.2 7.4,3.8 1.4,2.5 5.4,4.1 3.3,-2 -.6,-2.2 -3.5,-2 3.1,1.2 .5,-.7 .9,1.3 0,2.7 2.1,-.6 2.1,1.8 -2.5,-9.8 1.2,1.3 1.4,6 2.2,2.5 2.4,-.4 1.8,3.5 h .9 l .6,5.6 3.4,.5 1.6,2.2 1.8,1.1 .4,2.8 -1.8,2.6 2.9,1.6 1.2,-2.4 -.2,3.1 -.8,.9 1.4,1.7 .7,-2.4 -.2,-1.2 .8,.2 .6,2.3 -1,1.4 .6,2.6 .5,.4 .3,-1.6 .7,.6 -.3,2 1.2,.2 -.4,.9 1.7,-.1 0,-1 h -1 l .1,-1.7 -.8,-.6 1.7,-.3 .5,-.8 0,-1.6 .5,1.3 -.6,1.8 1.2,3.9 1.8,.1 2.2,-4.2 .1,-1.9 -1.3,-4 -.1,-1.2 .5,-1.2 -.7,-.7 -1.7,.1 -2.5,-2 -1.7,0 -2,-1.4 -1.5,0 -.5,-1.6 -1.4,-.3 -.2,-1.5 -1,-.5 .1,-1.7 -5.1,-7.4 -1.8,-1.5 v -1.2 l -4.3,-3.5 -.7,-1.1 -1.6,-2 -1.9,-.6 0,-2.2 -1.2,-1.3 -1.7,-.7 -2.1,1.3 -1.6,2.1 -.4,2.4 -1.5,.1 -2.5,2.7 -.8,-.3 v -2.5 l -2.4,-2.2 -2.3,-2 -.5,-2 -2.5,-1.3 .2,-2.2 -2.8,-.1 -.7,1.1 -1.2,0 -.7,-.7 -1.2,.8 -1.8,-1.2 0,-85.8 -6.9,-4.1 -1.8,-.5 -2.2,1.1 -2.2,.1 -2.3,-1.6 -4.3,-.6 -5.8,-3.6 -5.7,-.4 -2,.5 -.2,-1.8 -1.8,-.7 1.1,-1 -.2,-.9 -3.2,-1.1 h -2.4 l -.4,.4 -.9,-.6 .1,-2.6 -.8,-.9 -2.5,2.9 -.8,-.1 v -.8 l 1.7,-.8 v -.8 l -1.9,-2.4 -1.1,-.1 -4.5,3.1 h -3.9 l .4,-.9 -1.8,-.1 -5.2,3.4 -1.8,0 -.6,-.8 -2.7,1.5 -3.6,3.7 -2.8,2.7 -1.5,1.2  -2.6,.1 -2.2,-.4 -2.3,-1.3 v 0 l -2.8,3.9 -.1,2.4 2.6,2.4 2.1,4.5 .2,5.3 2.9,2 3.4,.4 .7,.8 -1.5,2.3 .7,2.7 -1.7,-2.6 v -2.4 l -1.5,-.3 .1,1.2 .7,2.1 2.9,3.7 h -1.4 l -2.2,1.1 -6.2,-2.5 -.1,-2 1.4,-1.3 0,-1.4 -2.1,-.5 -2.3,.2 -4.8,.2 1.5,2.3 -1.9,-1.8 -8.4,1.2 -.8,1.5 4.9,4.7 -.8,1.4 -.3,2 -.7,.8 -.1,1.9 4.4,3.6 4.1,.2 4.6,1.9 h 2 l .8,-.6 3.8,.1 .1,-.8 1.2,1.1 .1,2 -2.5,-.1 .1,3.3 .5,3.2 -2.9,2.7 -1.9,-.1 -2,-.8 -1,.1 -3.1,2.1 -1.7,.2 -1.4,-2.8 -3.1,0 -2.2,2 -.5,1.8 -3.3,1.8 -5.3,4.3 -.3,3.1 .7,2.2 1,1.2 1,-.4 .9,1 -.8,.6 -1.5,.9 1.1,1.5 -2.6,1.1 .8,2.2 1.7,2.3 .8,4.1 4,1.5 2.6,-.8 1.7,-1.1 .5,2.1 .3,4.4 -1.9,1.4 0,4.4 -.6,.9 h -1.7 l 1.7,1.2 2.1,-.1 .4,-1 4.6,-.6 2,2.6 1.3,-.7 1.3,5.1 1,.5 1,-.7 .1,-2.4 .9,-1 .7,1.1 .2,1.6 1.6,.4 4.7,-1.2 .2,1.2 -2,1.1 -1.6,1.7 -2.8,7 -4.3,2 -1.4,1.5 -.3,1.4 -1,-.6 -9.3,3.3 -1.8,4.1 -1.3,-.4 .5,-1.1 -1.5,-1.4 -3.5,-.2 -5.3,3.2 -2.2,1.3 -2.3,0 -.5,2.4 z"/><path class="az" d="m 139.6,387.6 3,-2.2 .8,-2.4 -1,-1.6 -1.8,-.2 -1.1,-1.6 1.1,-6.9 1.6,-.3 2.4,-3.2 1.6,-7 2.4,-3.6 4.8,-1.7 1.3,-1.3 -.4,-1.9 -2.3,-2.5 -1.2,-5.8 -1.4,-1.8 -1.3,-3.4 .9,-2.1 1.4,-3 .5,-2.9 -.5,-4.9 1,-13.6 3.5,-.6 3.7,1.4 1.2,2.7 h 2 l 2.4,-2.9 3.4,-17.5 46.2,8.2 40,6 -17.4,124.1 -37.3,-5.4 -64.2,-37.5 .5,-2.9 2,-1.8 z"/><path class="ar" d="m 584.2,367 .9,-2.2 1.2,.5 .7,-1 -.8,-.7 .3,-1.5 -1.1,-.9 .6,-1 -.1,-1.5 -1.1,-.1 .8,-.8 1.3,.8 .3,-1.4 -.4,-1.1 .1,-.7 2,.6 -.4,-1.5 1.6,-1.3 -.5,-.9 -1.1,.1 -.6,-.9 .9,-.9 1.6,-.2 .5,-.8 1.4,-.2 -.1,-.8 -.9,-.9 v -.5 h 1.5 l .4,-.7 -1.4,-1 -.1,-.6 -11.2,.8 2.8,-5.1 1.7,-1.5 v -2.2 l -1.6,-2.5 -39.8,2 -39.1,.7 4.1,24.4 -.7,39 2.6,2.3 2.8,-1.3 3.2,.8 .2,11.9 52.3,-1.3 1.2,-1.5 .5,-3 -1.5,-2.3 -.5,-2.2 .9,-.7 v -.8 l -1.7,-1.1 -.1,-.7 1.6,-.9 -1.2,-1.1 1.7,-7.1 3.4,-1.6 v -.8 l -1.1,-1.4 2.9,-5.4 h 1.9 l 1.5,-1.2 -.3,-5.2 3.1,-4.5 1.8,-.6 -.5,-3.1 z"/><path class="ca" d="m 69.4,365.6 3.4,5.2 -1.4,.1 -1.8,-1.9 z m 1.9,-9.8 1.8,4.1 2.6,1 .7,-.6 -1.3,-2.5 -2.6,-2.4 z m -19.9,-19 v 2.4 l 2,1.2 4.4,-.2 1,-1 -3.1,-.2 z m -5.9,.1 3.3,.5 1.4,2.2 h -3.8 z m 47.9,45.5 -1,-3 .2,-3 -.4,-7.9 -1.8,-4.8 -1.2,-1.4 -.6,-1.5 -7,-8.6 -3.6,.1 -2,-1.9 1.1,-1.8 -.7,-3.7 -2.2,-1.2 -3.9,-.6 -2.8,-1.3 -1.5,-1.9 -4.5,-6.6 -2.7,-2.2 -3.7,-.5 -3.1,-2.3 -4.7,-1.5 -2.8,-.3 -2.5,-2.5 .2,-2.8 .8,-4.8 1.8,-5.1 -1.4,-1.6 -4,-9.4 -2.7,-3.7 -.4,-3 -1.6,-2.3 .2,-2.5 -2,-5 -2.9,-2.7 .6,-7.1 2.4,-.8 1.8,-3.1 -.4,-3.2 -1,-.9 h -2.5 l -2.5,-3.3 -1.5,-3.5 v -7.5 l 1.2,-4.2 .2,-2.1 2.5,.2 -.1,1.6 -.8,.7 v 2.5 l 3.7,3.2 v -4.7 l -1.4,-3.4 .5,-1.1 -1,-1.7 2.8,-1.5 -1.9,-3 -1.4,.5 -1.5,3.8 .5,1.3 -.8,1 -.9,-.1 -5.4,-6.1 .7,-5.6 -1.1,-3.9 -6.5,-12.8 .8,-10.7 2.3,-3.6 .2,-6.4 -5.5,-11.1 .3,-5.2 6.9,-7.5 1.7,-2.4 -.1,-1.4 4,-9.2 .1,-8.4 .9,-2.5 66.1,18.6 -16.4,63.1 1.1,3.5 70.4,105 -.9,2.1 1.3,3.4 1.4,1.8 1.2,5.8 2.3,2.5 .4,1.9 -1.3,1.3 -4.8,1.7 -2.4,3.6 -1.6,7 -2.4,3.2 -1.6,.3 -1.1,6.9 1.1,1.6 1.8,.2 1,1.6 -.8,2.4 -3,2.2 -2.2,-.1 z"/><path class="co" d="m 374.6,323.3 -16.5,-1 -51.7,-4.8 -52.6,-6.5 11.5,-88.3 44.9,5.7 37.5,3.4 33.1,2.4 -1.4,22.1 z"/><path class="ct" d="m 873.5,178.9 .4,-1.1 -3.2,-12.3 -.1,-.3 -14.9,3.4 v .7 l -.9,.3 -.5,-.7 -10.5,2.4 2.8,16.3 1.8,1.5 -3.5,3.4 1.7,2.2 5.4,-4.5 1.7,-1.3 h .8 l 2.4,-3.1 1.4,.1 2.9,-1.1 h 2.1 l 5.3,-2.7 2.8,-.9 1,-1 1.5,.5 z"/><path class="de" d="m 822.2,226.6 -1.6,.3 -1.5,1.1 -1.2,2.1 7.6,27.1 10.9,-2.3 -2.2,-7.6 -1.1,.5 -3.3,-2.6 -.5,-1.7 -1.8,-1 -.2,-3.7 -2.1,-2.2 -1.1,-.8 -1.2,-1.1 -.4,-3.2 .3,-2.1 1,-2.2 z"/><path class="fl" d="m 751.7,445.1 -4,-.7 -1.7,-.9 -2.2,1.4 v 2.5 l 1.4,2.1 -.5,4.3 -2.1,.6 -1,-1.1 -.6,-3.2 -50.1,3.3 -3.3,-6 -48.8,5.1 -.5,2.9 2.5,2.8 1.7,.7 .9,1.2 -.4,7.3 -1.1,.6 .5,.4 1,-.3 .7,-.8 10.5,-2.7 9.2,-.5 8.1,1.9 8.5,5 2.4,.8 2.2,2 -.1,2.7 h 2.4 l 1.9,-1 2.5,.1 2,-.8 2.9,-2 3.1,-2.9 1.1,-.4 .6,.5 h 1.4 l .5,-.8 -.5,-1.2 -.6,-.6 .2,-.8 2,-1.1 5,-.4 .8,1 1,.1 2.3,1 3,1.8 1.2,1.7 1.1,1.2 2.8,1.4 v 2.4 l 2.8,1.9 1,.1 1.6,1.4 .7,1.6 1,.2 .8,2.1 .7,.6 1,-1.1 2.9,.1 .5,1.4 1.1,.9 v 1.3 l 2.9,2.2 .2,9.6 -1.8,5.8 1,1.2 -.2,3.4 -.8,1.4 .7,1.2 2.3,2.3 .3,1.5 .8,1 -.4,-1.9 1.3,-.6 .8,-3.6 -3,-1.2 .1,-.6 2.6,-.4 .9,2.6 1.1,.6 .1,-2 1.1,.3 .6,.8 -.1,.7 -2.9,4.2 -.2,1.1 -1.7,1.9 v 1.1 l 3.7,3.8 5.3,7.9 1.8,2.1 v 1.8 l 2.8,4.6 2.3,.6 .7,-1.2 -2.1,.3 -3,-4.5 .2,-1.4 1.5,-.8 v -1.5 l -.6,-1.3 .9,-.9 .4,.9 .7,.5 v 4 l -1.2,-.6 -.8,.9 1.4,1.6 1,2.6 1.2,-.6 2.3,1.2 2.1,2.2 1.6,5.1 3.1,4.8 .8,-1.3 2.8,-.5 3.2,1.3 .3,1.7 3.3,3.8 .1,1.1 2.2,2.7 -.7,.5 v 2.7 l 2.7,1.4 h 1.5 l 2.7,-1.8 1.5,.3 1.1,.4 2.3,-1.7 .2,-.7 1.2,.3 2.4,-1.7 1.3,-2.3 -.7,-3.2 -.2,-1.3 1.1,-4 .6,-.2 .6,1.6 .8,-1.8 -.8,-7.2 -.4,-10.5 -1,-6.8 -.7,-1.7 -6.6,-11.1 -5.2,-9.1 -2.2,-3.3 -1.3,-3.6 -.2,-3.4 .9,-.3 v -.9 l -1.1,-2.2 -4,-4 -7.6,-9.7 -5.7,-10.4 -4.3,-10.7 -.6,-3.7 -1.2,-1 -.5,-3.8 z m 9.2,134.5 1.7,-.1 -.7,-1 z m 7.3,-1.1 v -.7 l 1.6,-.2 3.7,-3.3 1.5,-.6 2.4,-.9 .3,1.3 1.7,.8 -2.6,1.2 h -2.4 l -3.9,2.5 z m 17.2,-7.6 -3,1.4 -1,1.3 1.1,.1 z m 3.8,-2.9 -1.1,.3 -1.4,2 1.1,-.2 1.5,-1.6 z m 8.3,-15.7 -1.7,5.6 -.8,1 -1,2.6 -1.2,1.6 -.7,1.7 -1.9,2.2 v .9 l 2.7,-2.8 2.4,-3.5 .6,-2 2.1,-4.9 z"/><path class="ga" d="m 761.8,414.1 v 1.4 l -4.2,6.2 -1.2,.2 1.5,.5 v 2 l -.9,1.1 -.6,6 -2.3,6.2 .5,2 .7,5.1 -3.6,.3 -4,-.7 -1.7,-.9 -2.2,1.4 v 2.5 l 1.4,2.1 -.5,4.3 -2.1,.6 -1,-1.1 -.6,-3.2 -50.1,3.3 -3.3,-6 -.7,-2.2 -1.5,-1.5 -.5,-1.4 .6,-6.3 -2.4,-5.7 .5,-2.6 .3,-3.7 2.2,-3.8 -.2,-1.1 -1.7,-1 v -3.2 l -1.8,-1.9 -2.9,-6.1 -12.9,-45.8 22.9,-2.9 21.4,-3 -.1,1.9 -1.9,1 -1.4,3.2 .2,1.3 6.1,3.8 2.6,-.3 3.1,4 .4,1.7 4.2,5.1 2.6,1.7 1.4,.2 2.2,1.6 1.1,2.2 2,1.6 1.8,.5 2.7,2.7 .1,1.4 2.6,2.8 5,2.3 3.6,6.7 .3,2.7 3.9,2.1 2.5,4.8 .8,3.1 4.2,.4 z"/><path class="hi" d="m 317,553.7 -.2,3.2 1.7,1.9 .1,1.2 -4.8,4.5 -.1,1.2 1.9,3.2 1.7,4.2 v 2.6 l -.5,1.2 .1,3.4 4.1,2.1 1.1,1.1 1.2,-1.1 2.1,-3.6 4.5,-2.9 3.3,-.5 2.5,-1 1.7,-1.2 3.2,-3.5 -2.8,-1.1 -1.4,-1.4 .1,-1.7 -.5,-.6 h -2 l .2,-2.5 -.7,-1.2 -2.6,-2.3 -4.5,-1.9 -2.8,-.2 -3.3,-2.7 -1.2,-.6 z m -15.3,-17 -1.1,1.5 -.1,1.7 2.7,2.4 1.9,.5 .6,1 .4,3 3.6,.2 5.3,-2.6 -.1,-2.5 -1.4,-.5 -3.5,-2.6 -1.8,-.3 -2.9,1.3 -1.5,-2.7 z m -1.5,11.5 .9,-1.4 2.5,-.3 .6,1.8 z m -7,-8.7 1.7,4 3.1,-.6 .3,-2 -1.4,-1.5 z m -4.1,-6.7 -1.1,2.4 h 5 l 4.8,1.6 2.5,-1.6 .2,-1.5 -4.8,.2 z m -16,-10.6 -1.9,2.1 -2.9,.6 .8,2.2 2.2,2.8 .1,1 2.1,-.3 2.3,.1 1.7,1.2 3.5,-.8 v -.7 l -1,-.8 -.5,-2.1 -.8,-.3 -.5,1 -1.2,-1.3 .2,-1.4 -1.8,-3.3 -1.1,-.7 z m -31.8,-12.4 -4.2,2.9 .2,2.3 2.4,1.2 1.9,1.3 2.7,.4 2.6,-2.2 -.2,-1.9 .8,-1.7 v -1.4 l -1,-.9 z m -10.8,4.8 -.3,1.2 -1.9,.9 -.6,1.8 1,.8 1.1,-1.5 1.9,-.6 .4,-2.6 z"/><path class="id" d="m 165.3,183.1 -24.4,-5.4 8.5,-37.3 2.9,-5.8 .4,-2.1 .8,-.9 -.9,-2 -2.9,-1.2 .2,-4.2 4,-5.8 2.5,-.8 1.6,-2.3 -.1,-1.6 1.8,-1.6 3.2,-5.5 4.2,-4.8 -.5,-3.2 -3.5,-3.1 -1.6,-3.6 1.1,-4.3 -.7,-4 12.7,-56.1 14.2,3 -4.8,22 3.7,7.4 -1.6,4.8 3.6,4.8 1.9,.7 3.9,8.3 v 2.1 l 2.3,3 h .9 l 1.4,2.1 h 3.2 v 1.6 l -7.1,17 -.5,4.1 1.4,.5 1.6,2.6 2.8,-1.4 3.6,-2.4 1.9,1.9 .5,2.5 -.5,3.2 2.5,9.7 2.6,3.5 2.3,1.4 .4,3 v 4.1 l 2.3,2.3 1.6,-2.3 6.9,1.6 2.1,-1.2 9,1.7 2.8,-3.3 1.8,-.6 1.2,1.8 1.6,4.1 .9,.1 -8.5,54.8 -47.9,-8.2 z"/><path class="il" d="m 623.5,265.9 -1,5.2 v 2 l 2.4,3.5 v .7 l -.3,.9 .9,1.9 -.3,2.4 -1.6,1.8 -1.3,4.2 -3.8,5.3 -.1,7 h -1 l .9,1.9 v .9 l -2.2,2.7 .1,1.1 1.5,2.2 -.1,.9 -3.7,.6 -.6,1.2 -1.2,-.6 -1,.5 -.4,3.3 1.7,1.8 -.4,2.4 -1.5,.3 -6.9,-3 -4,3.7 .3,1.8 h -2.8 l -1.4,-1.5 -1.8,-3.8 v -1.9 l .8,-.6 .1,-1.3 -1.7,-1.9 -.9,-2.5 -2.7,-4.1 -4.8,-1.3 -7.4,-7.1 -.4,-2.4 2.8,-7.6 -.4,-1.9 1.2,-1.1 v -1.3 l -2.8,-1.5 -3,-.7 -3.4,1.2 -1.3,-2.3 .6,-1.9 -.7,-2.4 -8.6,-8.4 -2.2,-1.5 -2.5,-5.9 -1.2,-5.4 1.4,-3.7 .7,-.7 .1,-2.3 -.7,-.9 1,-1.5 1.8,-.6 .9,-.3 1,-1.2 v -2.4 l 1.7,-2.4 .5,-.5 .1,-3.5 -.9,-1.4 -1,-.3 -1.1,-1.6 1,-4 3,-.8 h 2.4 l 4.2,-1.8 1.7,-2.2 .1,-2.4 1.1,-1.3 1.3,-3.2 -.1,-2.6 -2.8,-3.5 h -1.2 l -.9,-1.1 .2,-1.6 -1.7,-1.7 -2.5,-1.3 .5,-.6 45.9,-2.8 .1,4.6 3.4,4.6 1.2,4.1 1.6,3.2 z"/><path class="in" d="m 629.2,214.8 -5.1,2.3 -4.7,-1.4 4.1,50.2 -1,5.2 v 2 l 2.4,3.5 v .7 l -.3,.9 .9,1.9 -.3,2.4 -1.6,1.8 -1.3,4.2 -3.8,5.3 -.1,7 h -1 l .9,1.9 1.1,.8 .6,-1 -.7,-1.7 4.6,-.5 .2,1.2 1.1,.2 .4,-.9 -.6,-1.3 .3,-.8 1.3,.8 1.7,-.4 1.7,.6 3.4,2.1 1.8,-2.8 3.5,-2.2 3,3.3 1.6,-2.1 .3,-2.7 3.8,-2.3 .2,1.3 1.9,1.2 3,-.2 1.2,-.7 .1,-3.4 2.5,-3.7 4.6,-4.4 -.1,-1.7 1.2,-3.8 2.2,1 6.7,-4.5 -.4,-1.7 -1.5,-2.1 1,-1.9 -6.6,-57.2 -.1,-1.4 -32.4,3.4 z"/><path class="ia" d="m 556.9,183 2.1,1.6 .6,1.1 -1.6,3.3 -.1,2.5 2,5.5 2.7,1.5 3.3,.7 1.3,2.8 -.5,.6 2.5,1.3 1.7,1.7 -.2,1.6 .9,1.1 h 1.2 l 2.8,3.5 .1,2.6 -1.3,3.2 -1.1,1.3 -.1,2.4 -1.7,2.2 -4.2,1.8 h -2.4 l -3,.8 -1,4 1.1,1.6 1,.3 .9,1.4 -.1,3.5 -.5,.5 -1.7,2.4 v 2.4 l -1,1.2 -.9,.3 -1.8,.6 -1,1.5 .7,.9 -.1,2.3 -.7,.7 -1.5,-.8 -1.1,-1.1 -.6,-1.6 -1.7,-1.3 -14.3,.8 -27.2,1.2 -25.9,-.1 -1.8,-4.4 .7,-2.2 -.8,-3.3 .2,-2.9 -1.3,-.7 -.4,-6.1 -2.8,-5 -.2,-3.7 -2.2,-4.3 -1.3,-3.7 v -1.4 l -.6,-1.7 v -2.3 l -.5,-.9 -.7,-1.7 -.3,-1.3 -1.3,-1.2 1,-4.3 1.7,-5.1 -.7,-2 -1.3,-.4 -.4,-1.6 1,-.5 .1,-1.1 -1.3,-1.5 .1,-1.6 2.2,.1 h 28.2 l 36.3,-.9 18.6,-.7 z"/><path class="ks" d="m 459.1,259.5 -43.7,-1.2 -36,-2 -4.8,67 67.7,2.9 62,.1 -.5,-48.1 -3.2,-.7 -2.6,-4.7 -2.5,-2.5 .5,-2.3 2.7,-2.6 .1,-1.2 -1.5,-2.1 -.9,1 -2,-.6 -2.9,-3 z"/><path class="ky" d="m 692.1,322.5 -20.5,1.4 -5.2,.8 -17.4,1 -2.6,.8 -22.6,2 -.7,-.6 h -3.7 l 1.2,3.2 -.6,.9 -23.3,1.5 1,-2.7 1.4,.9 .7,-.4 1.2,-4.1 -1,-1 1,-2 .2,-.9 -1.3,-.8 -.3,-1.8 4,-3.7 6.9,3 1.5,-.3 .4,-2.4 -1.7,-1.8 .4,-3.3 1,-.5 1.2,.6 .6,-1.2 3.7,-.6 .1,-.9 -1.5,-2.2 -.1,-1.1 2.2,-2.7 0,-.9 1.1,.8 .6,-1 -.7,-1.7 4.6,-.5 .2,1.2 1.1,.2 .4,-.9 -.6,-1.3 .3,-.8 1.3,.8 1.7,-.4 1.7,.6 3.4,2.1 1.8,-2.8 3.5,-2.2 3,3.3 1.6,-2.1 .3,-2.7 3.8,-2.3 .2,1.3 1.9,1.2 3,-.2 1.2,-.7 .1,-3.4 2.5,-3.7 4.6,-4.4 -.1,-1.7 1.2,-3.8 2.2,1 6.7,-4.5 -.4,-1.7 -1.5,-2.1 1,-1.9 1.3,.5 2.2,.1 1.9,-.8 2.9,1.2 2.2,3.4 v 1 l 4.1,.7 2.3,-.2 1.9,2.1 2.2,.2 v -1 l 1.9,-.8 3,.8 1.2,.8 1.3,-.7 h .9 l .6,-1.7 3.4,-1.8 .5,.8 .8,2.9 3.5,1.4 1.2,2.1 -.1,1.1 .6,1 -.6,3.6 1.9,1.6 .8,1.1 1,.6 -.1,.9 4.4,5.6 h 1.4 l 1.5,1.8 1.2,.3 1.4,-.1 -4.9,6.6 -2.9,1 -3,3 -.4,2.2 -2.1,1.3 -.1,1.7 -1.4,1.4 -1.8,.5 -.5,1.9 -1,.4 -6.9,4.2 z m -98,11.3 -.7,-.7 .2,-1 h 1.1 l .7,.7 -.3,1 z"/><path class="la" d="m 602.5,472.8 -1.2,-1.8 .3,-1.3 -4.8,-6.8 .9,-4.6 1,-1.4 .1,-1.4 -36,2 1.7,-11.9 2.4,-4.8 6,-8.4 -1.8,-2.5 h 2 v -3.3 l -2.4,-2.5 .5,-1.7 -1.2,-1 -1.6,-7.1 .6,-1.4 -52.3,1.3 .5,19.9 .7,3.4 2.6,2.8 .7,5.4 3.8,4.6 .8,4.3 h 1 l -.1,7.3 -3.3,6.4 1.3,2.3 -1.3,1.5 .7,3 -.1,4.3 -2.2,3.5 -.1,.8 -1.7,1.2 1,1.8 1.2,1.1 1.6,-1.3 5.3,-.9 6.1,-.1 9.6,3.8 8,1 1.5,-1.4 1.8,-.2 4.8,2.2 1.6,-.4 1.1,-1.5 -4.2,-1.8 -2.2,1 -1.1,-.2 -1.4,-2 3.3,-2.2 1.6,-.1 v 1.7 l 1.5,-.1 3.4,-.3 .4,2.3 1.1,.4 .6,1.9 4.8,1 1.7,1.6 v .7 h -1.2 l -1.5,1.7 1.7,1.2 5.4,1 2.7,2.8 4.4,-1 -3.7,.2 -.1,-.6 2.8,-.7 .2,-1.8 1.2,-.3 v -1.4 l 1.1,.1 v 1.6 l 2.5,.1 .8,-1.9 .9,.3 .2,2.5 1.2,.2 -1.8,2 2.6,-.9 2,-1.1 2.9,-3.3 h -.7 l -1.3,1.2 -.4,-.1 -.5,-.8 .9,-1.2 v -2.3 l 1.1,-.8 .7,.7 1,-.8 1,-.1 .6,1.3 -.6,1.9 h 2.4 l 5.1,1.7 .5,1.3 1.6,1.4 2.8,.1 1.3,.7 1.8,-1 .9,-1.7 v -1.7 h -1.4 l -1.2,-1.4 -1.1,-1.1 -3.2,-.9 -2.6,.2 -4.2,-2.4 v -2.3 l 1.3,-1 2.4,.6 -3.1,-1.6 .2,-.8 h 3.6 l 2.6,-3.5 -2.6,-1.8 .8,-1.5 -1.2,-.8 h -.8 l -2,2.1 v 2.1 l -.6,.7 -1.1,-.1 -1.6,-1.4 h -1.3 v -1.5 l .6,-.7 .8,.7 1.7,-1.6 .7,-1.6 .8,-.3 z m -10.3,-2.7 1.9,1 .8,1.1 2.5,.1 1.5,.8 .2,1.4 -.4,.6 -.9,-1.5 -1.4,1.2 -.9,1.4 -2.8,.8 -1.6,.1 -3.7,-1 .1,-1.7 2,-2 1.1,-2.4 z m -4.7,1.2 v 1.1 l -1.8,2 h -1.2 v -2.2 l 1.6,-1.5 z"/><path class="me" d="m 875,128.7 .6,4 3.2,2 .8,2.2 2.3,1.4 1.4,-.3 1,-3 -.8,-2.9 1.6,-.9 .5,-2.8 -.6,-1.3 3.3,-1.9 -2.2,-2.3 .9,-2.4 1.4,-2.2 .5,3.2 1.6,-2 1.3,.9 1.2,-.8 v -1.7 l 3.2,-1.3 .3,-2.9 2.5,-.2 2.7,-3.7 v -.7 l -.9,-.5 -.1,-3.3 .6,-1.1 .2,1.6 1,-.5 -.2,-3.2 -.9,.3 -.1,1.2 -1.2,-1.4 .9,-1.4 .6,.1 1.1,-.4 .5,2.8 2,-.3 2.9,.7 v -1 l -1.1,-1.2 1.3,.1 .1,-2.3 .6,.8 .3,1.9 2.1,1.5 .2,-1 .9,-.2 -.3,-.8 .8,-.6 -.1,-1.6 -1.6,-.2 -2,.7 1.4,-1.6 .7,-.8 1.3,-.2 .4,1.3 1.7,1.6 .4,-2.1 2.3,-1.2 -.9,-1.3 .1,-1.7 1.1,.5 h .7 l 1.7,-1.4 .4,-2.3 2.2,.3 .1,-.7 .2,-1.6 .5,1.4 1.5,-1 2.3,-4.1 -.1,-2.2 -1.4,-2 -3,-3.2 h -1.9 l -.8,2.2 -2.9,-3 .3,-.8 v -1.5 l -1.6,-4.5 -.8,-.2 -.7,.4 h -4.8 l -.3,-3.6 -8.1,-26 -7.3,-3.7 -2.9,-.1 -6.7,6.6 -2.7,-1 -1,-3.9 h -2.7 l -6.9,19.5 .7,6.2 -1.7,2.4 -.4,4.6 1.3,3.7 .8,.2 v 1.6 l -1.6,4.5 -1.5,1.4 -1.3,2.2 -.4,7.8 -2.4,-1 -1.5,.4 z m 34.6,-24.7 -1,.8 v 1.3 l .7,-.8 .9,.8 .4,-.5 1.1,.2 -1,-.8 .4,-.8 z m -1.7,2.6 -1,1.1 .5,.4 -.1,1 h 1.1 v -1.8 z m -3,-1.6 .9,1.3 1,.5 .3,-1 v -1.8 l -1.3,-.7 -.4,1.2 z m -1,5 -1.7,-1.7 1.6,-2.4 .8,.3 .2,1.1 1,.8 v 1.1 l -1,1 z"/><path class="md" d="m 822.9,269.3 0,-1.7 h -.8 l 0,1.8 z m 11.8,-3.9 1.2,-2.2 .1,-2.5 -.6,-.6 -.7,.9 -.2,2.1 -.8,1.4 -.3,1.1 -4.6,1.6 -.7,.8 -1.3,.2 -.4,.9 -1.3,.6 -.3,-2.5 .4,-.7 -.8,-.5 .2,-1.5 -1.6,1 v -2 l 1.2,-.3 -1.9,-.4 -.7,-.8 .4,-1.3 -.8,-.6 -.7,1.6 .5,.8 -.7,.6 -1.1,.5 -2,-1 -.2,-1.2 -1,-1.1 -1.4,-1.7 1.5,-.8 -1,-.6 v -.9 l .6,-1 1.7,-.3 -1.4,-.6 -.1,-.7 -1.3,-.1 -.4,1.1 -.6,.3 .1,-3.4 1,-1 .8,.7 .1,-1.6 -1,-.9 -.9,1.1 -1,1.4 -.6,-1 .2,-2.4 .9,-1 .9,.9 1.2,-.7 -.4,-1.7 -1,1 -.9,-2.1 -.2,-1.7 1.1,-2.4 1.1,-1.4 1.4,-.2 -.5,-.8 .5,-.6 -.3,-.7 .2,-2.1 -1.5,.4 -.8,1.1 1,1.3 -2.6,3.6 -.9,-.4 -.7,.9 -.6,2.2 -1.8,.5 1.3,.6 1.3,1.3 -.2,.7 .9,1.2 -1.1,1 .5,.3 -.5,1.3 v 2.1 l -.5,1.3 .9,1.1 .7,3.4 1.3,1.4 1.6,1.4 .4,2.8 1.6,2 .4,1.4 v 1 h -.7 l -1.5,-1.2 -.4,.2 -1.2,-.2 -1.7,-1.4 -1.4,-.3 -1,.5 -1.2,-.3 -.4,.2 -1.7,-.8 -1,-1 -1,-1.3 -.6,-.2 -.8,.7 -1.6,1.3 -1.1,-.8 -.4,-2.3 .8,-2.1 -.3,-.5 .3,-.4 -.7,-1 1,-.1 1,-.9 .4,-1.8 1.7,-2.6 -2.6,-1.8 -1,1.7 -.6,-.6 h -1 l -.6,-.1 -.4,-.4 .1,-.5 -1.7,-.6 -.8,.3 -1.2,-.1 -.7,-.7 -.5,-.2 -.2,-.7 .6,-.8 v -.9 l -1.2,-.2 -1,-.9 -.9,.1 -1.6,-.3 -.9,-.4 .2,-1.6 -1,-.5 -.2,-.7 h -.7 l -.8,-1.2 .2,-1 -2.6,.4 -2.2,-1.6 -1.4,.3 -.9,1.4 h -1.3 l -1.7,2.9 -3.3,.4 -1.9,-1 -2.6,3.8 -2.2,-.3 -3.1,3.9 -.9,1.6 -1.8,1.6 -1.7,-11.4 60.5,-11.8 7.6,27.1 10.9,-2.3 0,5.3 -.1,3.1 -1,1.8 z m -13.4,-1.8 -1.3,.9 .8,1.8 1.7,.8 -.4,-1.6 z"/><path class="ma" d="m 899.9,174.2 h 3.4 l .9,-.6 .1,-1.3 -1.9,-1.8 .4,1 -1.5,1.5 h -2.3 l .1,.8 z m -9,1.8 -1.2,-.6 1,-.8 .6,-2.1 1.2,-1 .8,-.2 .6,.9 1.1,.2 .6,-.6 .5,1.9 -1.3,.3 -2.8,.7 z m -34.9,-23.4 18.4,-3.8 1,-1.5 .3,-1.7 1.9,-.6 .5,-1.1 1.7,-1.1 1.3,.3 1.7,3.3 1,.4 1.1,-1.3 .8,1.3 v 1.1 l -3,2.4 .2,.8 -.9,1 .4,.8 -1.3,.3 .9,1.2 -.8,.7 .6,1 .9,-.2 .3,-.8 1.1,.6 h 1.8 l 2.5,2.6 .2,2.6 1.8,.1 .8,1.1 .6,2 1,.7 h 1.9 l 1.9,-.1 .8,-.9 1.6,-1.2 1.1,-.3 -1.2,-2.1 -.3,.9 -1.5,-3.6 h -.8 l -.4,.9 -1.2,-1 1.3,-1.1 1.8,.4 2.3,2.1 1.3,2.7 1.2,3.3 -1,2.8 v -1.8 l -.7,-1 -3.5,2.3 -.9,-.3 -1.6,1 -.1,1.2 -2.2,1.2 -2,2.1 -2,1.9 h -1.2 l 3.3,-3.3 .5,-1.9 -.5,-.6 -.3,-1.3 -.9,-.1 -.1,1.3 -1,1.2 h -1.2 l -.3,1.1 .4,1.2 -1.2,1.1 -1.1,-.2 -.4,1 -1.4,-3 -1.3,-1.1 -2.6,-1.3 -.6,-2.2 h -.8 l -.7,-2.6 -6.5,2 -.1,-.3 -14.9,3.4 v .7 l -.9,.3 -.5,-.7 -10.5,2.4 -.7,-1 .5,-15 z"/><path class="mi" d="m 663.3,209.8 .1,1.4 21.4,-3.5 .5,-1.2 3.9,-5.9 v -4.3 l .8,-2.1 2.2,-.8 2,-7.8 1,-.5 1,.6 -.2,.6 -1.1,.8 .3,.9 .8,.4 1.9,-1.4 .4,-9.8 -1.6,-2.3 -1.2,-3.7 v -2.5 l -2.3,-4.4 v -1.8 l -1.2,-3.3 -2.3,-3 -2.9,-1 -4.8,3 -2.5,4.6 -.2,.9 -3,3.5 -1.5,-.2 -2.9,-2.8 -.1,-3.4 1.5,-1.9 2,-.2 1.2,-1.7 .2,-4 .8,-.8 1.1,-.1 .9,-1.7 -.2,-9.6 -.3,-1.3 -1.2,-1.2 -1.7,-1 -.1,-1.8 .7,-.6 1.8,.8 -.3,-1.7 -1.9,-2.7 -.7,-1.6 -1.1,-1.1 h -2.2 l -8.1,-2.9 -1.4,-1.7 -3.1,-.3 -1.2,.3 -4.4,-2.3 h -1.4 l .5,1 -2.7,-.1 .1,.6 .6,.6 -2.5,2.1 .1,1.8 1.5,2.3 1.5,.2 v .6 l -1.5,.5 -2.1,-.1 -2.8,2.5 .1,2.5 .4,5.8 -2.2,3.4 .8,-4.5 -.8,-.6 -.9,5.3 -1,-2.3 .5,-2.3 -.5,-1 .6,-1.3 -.6,-1.1 1,-1 v -1.2 l -1.3,.6 -1.3,3.1 -.7,.7 -1.3,2.4 -1.7,-.2 -.1,1.2 h -1.6 l .2,1.5 .2,2 -3,1.2 .1,1.3 1,1.7 -.1,5.2 -1.3,4.4 -1.7,2.5 1.2,1.4 .8,3.5 -1,2.5 -.2,2.1 1.7,3.4 2.5,4.9 1.2,1.9 1.6,6.9 -.1,8.8 -.9,3.9 -2,3.2 -.9,3.7 -2,3 -1.2,1 z m -95.8,-96.8 3,3.8 17,3.8 1.4,1 4,.8 .7,.5 2.8,-.2 4.9,.8 1.4,1.5 -1,1 .8,.8 3.8,.7 1.2,1.2 .1,4.4 -1.3,2.8 2,.1 1,-.8 .9,.8 -1.1,3.1 1,1.6 1.2,.3 .8,-1.8 2.9,-4.6 1.6,-6 2.3,-2 -.5,-1.6 .5,-.9 1,1.6 -.3,2.2 2.9,-2.2 .2,-2.3 2.1,.6 .8,-1.6 .7,.6 -.7,1.5 -1,.5 -1,2 1.4,1.8 1.1,-.5 -.5,-.7 1,-1.5 1.9,-1.7 h .8 l .2,-2.6 2,-1.8 7.9,-.5 1.9,-3.1 3.8,-.3 3.8,1.2 4.2,2.7 .7,-.2 -.2,-3.5 .7,-.2 4.5,1.1 1.5,-.2 2.9,-.7 1.7,.4 1.8,.1 v -1.1 l -.7,-.9 -1.5,-.2 -1.1,-.8 .5,-1.4 -.8,-.3 -2.6,.1 -.1,-1 1.1,-.8 .6,.8 .5,-1.8 -.7,-.7 .7,-.2 -1.4,-1.3 .3,-1.3 .1,-1.9 h -1.3 l -1.5,1 -1.9,.1 -.5,1.8 -1.9,.2 -.3,-1.2 -2.2,.1 -1,1.2 -.7,-.1 -.2,-.8 -2.6,.4 -.1,-4.8 1,-2 -.7,-.1 -1.8,1.1 h -2.2 l -3.8,2.7 -6.2,.3 -4.1,.8 -1.9,1.5 -1.4,1.3 -2.5,1.7 -.3,.8 -.6,-1.7 -1.3,-.6 v .6 l .7,.7 v 1.3 l -1.5,-.6 h -.6 l -.3,1.2 -2,-1.9 -1.3,-.2 -1.3,1.5 -3.2,-.1 -.5,-1.4 -2,-1.9 -1.3,-1.6 v -.7 l -1.1,-1.4 -2.6,-1.2 -3.3,-.1 -1.1,-.9 h -1.4 l -.7,.4 -2.2,2.2 -.7,1.1 -1,-.7 .2,-1 .8,-2.1 3.2,-5 .8,-.2 1.7,-1.9 .7,-1.6 3,-.6 .8,-.6 -.1,-1 -.5,-.5 -4.5,.2 -2,.5 -2.6,1.2 -1.2,1.2 -1.7,2.2 -1.8,1 -3.3,3.4 -.4,1.6 -7.4,4.6 -4,.5 -1.8,.4 -2.3,3 -1.8,.7 -4.4,2.3 z m 100.7,3.8 3.8,.1 .6,-.5 -.2,-2 -1.7,-1.8 -1.9,.1 -.1,.5 1.1,.4 -1.6,.8 -.3,1 -.6,-.6 -.4,.8 z m -75.1,-41.9 -2.3,.2 -2.7,1.9 -7.1,5.3 .8,1 1.8,.3 2.8,-2 -1.1,-.5 2.3,-1.6 h 1 l 3,-1.9 -.1,-.9 z m 41.1,62.8 v 1 l 2.1,1.6 -.2,-2.4 z m -.7,2.8 1.1,.1 v .9 h -1 z m 21.4,-21.3 v .9 l .8,-.2 v -.5 z m 4.7,3.1 -.1,-1.1 -1.6,-.2 -.6,-.4 h -.9 l -.4,.3 .9,.4 1.1,1.1 z m -18,1.2 -.1,1.1 -.3,.7 .2,2.2 .4,.3 .7,.1 .5,-.9 .1,-1.6 -.3,-.6 -.1,-1.1 z"/><path class="mn" d="m 464.7,68.6 -1.1,2.8 .8,1.4 -.3,5.1 -.5,1.1 2.7,9.1 1.3,2.5 .7,14 1,2.7 -.4,5.8 2.9,7.4 .3,5.8 -.1,2.1 -.1,2.2 -.9,2 -3.1,1.9 -.3,1.2 1.7,2.5 .4,1.8 2.6,.6 1.5,1.9 -.2,39.5 h 28.2 l 36.3,-.9 18.6,-.7 -1.1,-4.5 -.2,-3 -2.2,-3 -2.8,-.7 -5.2,-3.6 -.6,-3.3 -6.3,-3.1 -.2,-1.3 h -3.3 l -2.2,-2.6 -2,-1.3 .7,-5.1 -.9,-1.6 .5,-5.4 1,-1.8 -.3,-2.7 -1.2,-1.3 -1.8,-.3 v -1.7 l 2.8,-5.8 5.9,-3.9 -.4,-13 .9,.4 .6,-.5 .1,-1.1 .9,-.6 1.4,1.2 .7,-.1 v 0 l -1.2,-2.2 4.3,-3.1 3.1,-3.7 1.6,-.8 4.7,-5.9 6.3,-5.8 3.9,-2.1 6.3,-2.7 7.6,-4.5 -.6,-.4 -3.7,.7 -2.8,.1 -1,-1.6 -1.4,-.9 -9.8,1.2 -1,-2.8 -1.6,-.1 -1.7,.8 -3.7,3.1 h -4.1 l -2.1,-1 -.3,-1.7 -3.9,-.8 -.6,-1.6 -.7,-1.3 -1,.9 -2.6,.1 -9.9,-5.5 h -2.9 l -.8,-.7 -3.1,1.3 -.8,1.3 -3.3,.8 -1.3,-.2 v -1.7 l -.7,-.9 h -5.9 l -.4,-1.4 h -2.6 l -1.1,.4 -2.4,-1.7 .3,-1.4 -.6,-2.4 -.7,-1.1 -.2,-3 -1,-3.1 -2.1,-1.6 h -2.9 l .1,8 -30.9,-.4 z"/><path class="ms" d="m 623.8,468.6 -5,.1 -2.4,-1.5 -7.9,2.5 -.9,-.7 -.5,.2 -.1,1.6 -.6,.1 -2.6,2.7 -.7,-.1 -.6,-.7 -1.2,-1.8 .3,-1.3 -4.8,-6.8 .9,-4.6 1,-1.4 .1,-1.4 -36,2 1.7,-11.9 2.4,-4.8 6,-8.4 -1.8,-2.5 h 2 v -3.3 l -2.4,-2.5 .5,-1.7 -1.2,-1 -1.6,-7.1 .6,-1.4 1.2,-1.5 .5,-3 -1.5,-2.3 -.5,-2.2 .9,-.7 v -.8 l -1.7,-1.1 -.1,-.7 1.6,-.9 -1.2,-1.1 1.7,-7.1 3.4,-1.6 v -.8 l -1.1,-1.4 2.9,-5.4 h 1.9 l 1.5,-1.2 -.3,-5.2 3.1,-4.5 1.8,-.6 -.5,-3.1 38.3,-2.6 1.3,2 -1.3,67 4.4,33.2 z"/><path class="mo" d="m 555.3,248.9 -1.1,-1.1 -.6,-1.6 -1.7,-1.3 -14.3,.8 -27.2,1.2 -25.9,-.1 1.3,1.3 -.3,1.4 2.1,3.7 3.9,6.3 2.9,3 2,.6 .9,-1 1.5,2.1 -.1,1.2 -2.7,2.6 -.5,2.3 2.5,2.5 2.6,4.7 3.2,.7 .5,48.1 .2,10.8 39.1,-.7 39.8,-2 1.6,2.5 v 2.2 l -1.7,1.5 -2.8,5.1 11.2,-.8 1,-2 1.2,-.5 v -.7 l -1.2,-1.1 -.6,-1 1.7,.2 .8,-.7 -1.4,-1.5 1.4,-.5 .1,-1 -.6,-1 v -1.3 l -.7,-.7 .2,-1 h 1.1 l .7,.7 -.3,1 .8,.7 .8,-1 1,-2.7 1.4,.9 .7,-.4 1.2,-4.1 -1,-1 1,-2 .2,-.9 -1.3,-.8 h -2.8 l -1.4,-1.5 -1.8,-3.8 v -1.9 l .8,-.6 .1,-1.3 -1.7,-1.9 -.9,-2.5 -2.7,-4.1 -4.8,-1.3 -7.4,-7.1 -.4,-2.4 2.8,-7.6 -.4,-1.9 1.2,-1.1 v -1.3 l -2.8,-1.5 -3,-.7 -3.4,1.2 -1.3,-2.3 .6,-1.9 -.7,-2.4 -8.6,-8.4 -2.2,-1.5 -2.5,-5.9 -1.2,-5.4 1.4,-3.7 z"/><path class="mt" d="m 247,130.5 57.3,7.9 51,5.3 2,-20.7 5.2,-66.7 -53.5,-5.6 -54.3,-7.7 -65.9,-12.5 -4.8,22 3.7,7.4 -1.6,4.8 3.6,4.8 1.9,.7 3.9,8.3 v 2.1 l 2.3,3 h .9 l 1.4,2.1 h 3.2 v 1.6 l -7.1,17 -.5,4.1 1.4,.5 1.6,2.6 2.8,-1.4 3.6,-2.4 1.9,1.9 .5,2.5 -.5,3.2 2.5,9.7 2.6,3.5 2.3,1.4 .4,3 v 4.1 l 2.3,2.3 1.6,-2.3 6.9,1.6 2.1,-1.2 9,1.7 2.8,-3.3 1.8,-.6 1.2,1.8 1.6,4.1 .9,.1 z"/><path class="ne" d="m 402.5,191.1 38,1.6 3.4,3.2 1.7,.2 2.1,2 1.8,-.1 1.8,-2 1.5,.6 1,-.7 .7,.5 .9,-.4 .7,.4 .9,-.4 1,.5 1.4,-.6 2,.6 .6,1.1 6.1,2.2 1.2,1.3 .9,2.6 1.8,.7 1.5,-.2 .5,.9 v 2.3 l .6,1.7 v 1.4 l 1.3,3.7 2.2,4.3 .2,3.7 2.8,5 .4,6.1 1.3,.7 -.2,2.9 .8,3.3 -.7,2.2 1.8,4.4 1.3,1.3 -.3,1.4 2.1,3.7 3.9,6.3 h -32.4 l -43.7,-1.2 -36,-2 1.4,-22.1 -33.1,-2.4 3.7,-44.2 z"/><path class="nv" d="m 167.6,296.8 -3.4,17.5 -2.4,2.9 h -2 l -1.2,-2.7 -3.7,-1.4 -3.5,.6 -1,13.6 .5,4.9 -.5,2.9 -1.4,3 -70.4,-105 -1.1,-3.5 16.4,-63.1 47,11.2 24.4,5.4 23.3,4.7 z"/><path class="nh" d="m 862.6,93.6 -1.3,.1 -1,-1.1 -1.9,1.4 -.5,6.1 1.2,2.3 -1.1,3.5 2.1,2.8 -.4,1.7 .1,1.3 -1.1,2.1 -1.4,.4 -.6,1.3 -2.1,1 -.7,1.5 1.4,3.4 -.5,2.5 .5,1.5 -1,1.9 .4,1.9 -1.3,1.9 .2,2.2 -.7,1.1 .7,4.5 .7,1.5 -.5,2.6 .9,1.8 -.2,2.5 -.5,1.3 -.1,1.4 2.1,2.6 18.4,-3.8 1,-1.5 .3,-1.7 1.9,-.6 .5,-1.1 1.7,-1.1 1.3,.3 .8,-4.8 -2.3,-1.4 -.8,-2.2 -3.2,-2 -.6,-4 -11.9,-36.8 z"/><path class="nj" d="m 842.5,195.4 -14.6,-4.9 -1.8,2.5 .1,2.2 -3,5.4 1.5,1.8 -.7,2 -1,1 .5,3.6 2.7,.9 1,2.8 2.1,1.1 4.2,3.2 -3.3,2.6 -1.6,2.3 -1.8,3 -1.6,.6 -1.4,1.7 -1,2.2 -.3,2.1 .8,.9 .4,2.3 1.2,.6 2.4,1.5 1.8,.8 1.6,.8 .1,1.1 .8,.1 1.1,-1.2 .8,.4 2.1,.2 -.2,2.9 .2,2.5 1.8,-.7 1.5,-3.9 1.6,-4.8 2.9,-2.8 .6,-3.5 -.6,-1.2 1.7,-2.9 v -1.2 l -.7,-1.1 1.2,-2.7 -.3,-3.6 -.6,-8.2 -1.2,-1.4 v 1.4 l .5,.6 h -1.1 l -.6,-.4 -1.3,-.2 -.9,.6 -1.2,-1.6 .7,-1.7 v -1 l 1.7,-.7 .8,-2.1 z"/><path class="nm" d="m 357.5,332.9 h -.8 l -7.9,99.3 -31.8,-2.6 -34.4,-3.6 -.3,3 2,2.2 -30.8,-4.1 -1.4,10.2 -15.7,-2.2 17.4,-124.1 52.6,6.5 51.7,4.8 z"/><path class="ny" d="m 872.9,181.6 -1.3,.1 -.5,1 z m -30.6,22.7 .7,.6 1.3,-.3 1.1,.3 .9,-1.3 h 1.9 l 2.4,-.9 5.1,-2.1 -.5,-.5 -1.9,.8 -2,.9 .2,-.8 2.6,-1.1 .8,-1 1.2,.1 4.1,-2.3 v .7 l -4.2,3 4.5,-2.8 1.7,-2.2 1.5,-.1 4.5,-3.1 3.2,-3.1 3,-2.3 1,-1.2 -1.7,-.1 -1,1.2 -.2,.7 -.9,.7 -.8,-1.1 -1.7,1 -.1,.9 -.9,-.2 .5,-.9 -1.2,-.7 -.6,.9 .9,.3 .2,.5 -.3,.5 -1.4,2.6 h -1.9 l .9,-1.8 .9,-.6 .3,-1.7 1.4,-1.6 .9,-.8 1.5,-.7 -1.2,-.2 -.7,.9 h -.7 l -1.1,.8 -.2,1 -2.2,2.1 -.4,.9 -1.4,.9 -7.7,1.9 .2,.9 -.9,.7 -2,.3 -1,-.6 -.2,1.1 -1.1,-.4 .1,1 -1.2,-.1 -1.2,.5 -.2,1.1 h -1 l .2,1 h -.7 l .2,1 -1.8,.4 -1.5,2.3 z m -.8,-.4 -1.6,.4 v 1 l -.7,1.6 .6,.7 2.4,-2.3 -.1,-.9 z m -10.1,-95.2 -.6,1.9 1.4,.9 -.4,1.5 .5,3.2 2.2,2.3 -.4,2.2 .6,2 -.4,1 -.3,3.8 3.1,6.7 -.8,1.8 .9,2.2 .9,-1.6 1.9,1.5 3,14.2 -.5,2 1.1,1 -.5,15 .7,1 2.8,16.3 1.8,1.5 -3.5,3.4 1.7,2.2 -1.3,3.3 -1.5,1.7 -1.5,2.3 -.2,-.7 .4,-5.9 -14.6,-4.9 -1.6,-1.1 -1.9,.3 -3,-2.2 -3,-5.8 h -2 l -.4,-1.5 -1.7,-1.1 -70.5,13.9 -.8,-6 4.3,-3.9 .6,-1.7 3.9,-2.5 .6,-2.4 2.3,-2 .8,-1.1 -1.7,-3.3 -1.7,-.5 -1.8,-3 -.2,-3.2 7.6,-3.9 8.2,-1.6 h 4.4 l 3.2,1.6 .9,-.1 1.8,-1.6 3.4,-.7 h 3 l 2.6,-1.3 2.5,-2.6 2.4,-3.1 1.9,-.4 1.1,-.5 .4,-3.2 -1.4,-2.7 -1.2,-.7 2,-1.3 -.1,-1.8 h -1.5 l -2.3,-1.4 -.1,-3.1 6.2,-6.1 .7,-2.4 3.7,-6.3 5.9,-6.4 2.1,-1.7 2.5,.1 20.6,-5.2 z"/><path class="nc" d="m 829,300.1 -29.1,6.1 -39.4,7.3 -29.4,3.5 v 5.2 l -1.5,-.1 -1.4,1.2 -2.4,5.2 -2.6,-1.1 -3.5,2.5 -.7,2.1 -1.5,1.2 -.8,-.8 -.1,-1.5 -.8,-.2 -4,3.3 -.6,3.4 -4.7,2.4 -.5,1.2 -3.2,2.6 -3.6,.5 -4.6,3 -.8,4.1 -1.3,.9 -1.5,-.1 -1.4,1.3 -.1,4.9 21.4,-3 4.4,-1.9 1.3,-.1 7.3,-4.3 23.2,-2.2 .4,.5 -.2,1.4 .7,.3 1.2,-1.5 3.3,3 .1,2.6 19.7,-2.8 24.5,17.1 4,-2.2 3,-.7 h 1.7 l 1.1,1.1 .8,-2 .6,-5 1.7,-3.9 5.4,-6.1 4.1,-3.5 5.4,-2.3 2.5,-.4 1.3,.4 .7,1.1 3.3,-6.6 3.3,-5.3 -.7,-.3 -4.4,6.8 -.5,-.8 2,-2.2 -.4,-1.5 -2,-.5 1,1.3 -1.2,.1 -1.2,-1.8 -1.2,2 -1.6,.2 1,-2.7 .7,-1.7 -.2,-2.9 -2.2,-.1 .9,-.9 1.1,.3 2.7,.1 .8,-.5 h 2.3 l 2,-1.9 .2,-3.2 1.3,-1.4 1.2,-.2 1.3,-1 -.5,-3.7 -2.2,-3.8 -2.7,-.2 -.9,1.6 -.5,-1 -2.7,.2 -1.2,.4 -1.9,1.2 -.3,-.4 h -.9 l -1.8,1.2 -2.6,.5 v -1.3 l .8,-1 1,.7 h 1 l 1.7,-2.1 3.7,-1.7 2,-2.2 h 2.4 l .8,1.3 1.7,.8 -.5,-1.5 -.3,-1.6 -2.8,-3.1 -.3,-1.4 -.4,1 -.9,-1.3 z m 7,31 2.7,-2.5 4.6,-3.3 v -3.7 l -.4,-3.1 -1.7,-4.2 1.5,1.4 1,3.2 .4,7.6 -1.7,.4 -3.1,2.4 -3.2,3.2 z m 1.9,-19.3 -.9,-.2 v 1 l 2.5,2.2 -.2,-1.4 z m 2.9,2.1 -1.4,-2.8 -2.2,-3.4 -2.4,-3 -2.2,-4.3 -.8,-.7 2.2,4.3 .3,1.3 3.4,5.5 1.8,2.1 z"/><path class="nd" d="m 464.7,68.6 -1.1,2.8 .8,1.4 -.3,5.1 -.5,1.1 2.7,9.1 1.3,2.5 .7,14 1,2.7 -.4,5.8 2.9,7.4 .3,5.8 -.1,2.1 -29.5,-.4 -46,-2.1 -39.2,-2.9 5.2,-66.7 44.5,3.4 55.3,1.6 z"/><path class="oh" d="m 685.7,208.8 1.9,-.4 3,1.3 2.1,.6 .7,.9 h 1 l 1,-1.5 1.3,.8 h 1.5 l -.1,1 -3.1,.5 -2,1.1 1.9,.8 1.6,-1.5 2.4,-.4 2.2,1.5 1.5,-.1 2.5,-1.7 3.6,-2.1 5.2,-.3 4.9,-5.9 3.8,-3.1 9.3,-5.1 4.9,29.9 -2.2,1.2 1.4,2.1 -.1,2.2 .6,2 -1.1,3.4 -.1,5.4 -1,3.6 .5,1.1 -.4,2.2 -1.1,.5 -2,3.3 -1.8,2 h -.6 l -1.8,1.7 -1.3,-1.2 -1.5,1.8 -.3,1.2 h -1.3 l -1.3,2.2 .1,2.1 -1,.5 1.4,1.1 v 1.9 l -1,.2 -.7,.8 -1,.5 -.6,-2.1 -1.6,-.5 -1,2.3 -.3,2.2 -1.1,1.3 1.3,3.6 -1.5,.8 -.4,3.5 h -1.5 l -3.2,1.4 -1.2,-2.1 -3.5,-1.4 -.8,-2.9 -.5,-.8 -3.4,1.8 -.6,1.7 h -.9 l -1.3,.7 -1.2,-.8 -3,-.8 -1.9,.8 v 1 l -2.2,-.2 -1.9,-2.1 -2.3,.2 -4.1,-.7 v -1 l -2.2,-3.4 -2.9,-1.2 -1.9,.8 -2.2,-.1 -1.3,-.5 -6.6,-57.2 21.4,-3.5 z"/><path class="ok" d="m 501.5,398.6 -4.6,-3.8 -2.2,-.9 -.5,1.6 -5.1,.3 -.6,-1.5 -5,2.5 -1.6,-.7 -3.7,.3 -.6,1.7 -3.6,.9 -1.3,-1.2 -1.2,.1 -2,-1.8 -2.1,.7 -2,-.5 -1.8,-2 -2.5,4.2 -1.2,.8 -1,-1.8 .3,-2 -1.2,-.7 -2.3,2.5 -1.7,-1.2 -.1,-1.5 -1.3,.5 -2.6,-1.7 -3,2.6 -2.3,-1.1 .7,-2.1 -2.3,.1 -1.9,-3 -3.5,-1.1 -2,2.3 -2.3,-2.2 -1.4,.4 -2,.1 -3.5,-1.9 -2.3,.1 -1.2,-.7 -.5,-2.9 -2.3,-1.7 -1.1,1.5 -1.4,-1 -1.2,-.4 -1.1,1 -1.5,-.3 -2.5,-3 -2.7,-1.3 1.4,-42.7 -52.6,-3.2 .6,-10.6 16.5,1 67.7,2.9 62,.1 .2,10.8 4.1,24.4 -.7,39 z"/><path class="or" d="m 93.9,166.5 47,11.2 8.5,-37.3 2.9,-5.8 .4,-2.1 .8,-.9 -.9,-2 -2.9,-1.2 .2,-4.2 4,-5.8 2.5,-.8 1.6,-2.3 -.1,-1.6 1.8,-1.6 3.2,-5.5 4.2,-4.8 -.5,-3.2 -3.5,-3.1 -1.6,-3.6 -30.3,-7.3 -2.8,1 -5.4,-.9 -1.8,-.9 -1.5,1.2 -3.3,-.4 -4.5,.5 -.9,.7 -4.2,-.4 -.8,-1.6 -1.2,-.2 -4.4,1.3 -1.6,-1.1 -2.2,.8 -.2,-1.8 -2.3,-1.2 -1.5,-.2 -1,-1.1 -3,.3 -1.2,-.8 h -1.2 l -1.2,.9 -5.5,.7 -6.6,-4.2 1.1,-5.6 -.4,-4.1 -3.2,-3.7 -3.7,.1 -.4,-1.1 .4,-1.2 -.7,-.8 -1,.1 -1.1,1.3 -1.5,-.2 -.5,-1.1 -1,-.1 -.7,.6 -2,-1.9 v 4.3 l -1.3,1.3 -1.1,3.5 -.1,2.3 -4.5,12.3 -13.2,31.3 -3.2,4.6 -1.6,-.1 .1,2.1 -5.2,7.1 -.3,3.3 1,1.3 .1,2.4 -1.2,1.1 -1.2,3 .1,5.7 1.2,2.9 z"/><path class="pa" d="m 826.3,189.4 -1.9,.3 -3,-2.2 -3,-5.8 h -2 l -.4,-1.5 -1.7,-1.1 -70.5,13.9 -.8,-6 -4.2,3.4 -.9,.1 -2.7,3 -3.3,1.7 4.9,29.9 3.2,19.7 17.4,-2.9 60.5,-11.8 1.2,-2.1 1.5,-1.1 1.6,-.3 1.6,.6 1.4,-1.7 1.6,-.6 1.8,-3 1.6,-2.3 3.3,-2.6 -4.2,-3.2 -2.1,-1.1 -1,-2.8 -2.7,-.9 -.5,-3.6 1,-1 .7,-2 -1.5,-1.8 3,-5.4 -.1,-2.2 1.8,-2.5 z"/><path class="ri" d="m 883.2,170.7 -1.3,-1.1 -2.6,-1.3 -.6,-2.2 h -.8 l -.7,-2.6 -6.5,2 3.2,12.3 -.4,1.1 .4,1.8 5.6,-3.6 .1,-3 -.8,-.8 .4,-.6 -.1,-1.3 -.9,-.7 1.2,-.4 -.9,-1.6 1.8,.7 .3,1.4 .7,1.2 -1.4,-.8 1.1,1.7 -.3,1.2 -.6,-1.1 v 2.5 l .6,-.9 .4,.9 1.3,-1.5 -.2,-2.5 1.4,3.1 1,-.9 z m -4.7,12.2 h .9 l .5,-.6 -.8,-1.3 -.7,.7 z"/><path class="sc" d="m 772.3,350.2 -19.7,2.8 -.1,-2.6 -3.3,-3 -1.2,1.5 -.7,-.3 .2,-1.4 -.4,-.5 -23.2,2.2 -7.3,4.3 -1.3,.1 -4.4,1.9 -.1,1.9 -1.9,1 -1.4,3.2 .2,1.3 6.1,3.8 2.6,-.3 3.1,4 .4,1.7 4.2,5.1 2.6,1.7 1.4,.2 2.2,1.6 1.1,2.2 2,1.6 1.8,.5 2.7,2.7 .1,1.4 2.6,2.8 5,2.3 3.6,6.7 .3,2.7 3.9,2.1 2.5,4.8 .8,3.1 4.2,.4 .8,-1.5 h .6 l 1.8,-1.5 .5,-2 3.2,-2.1 .3,-2.4 -1.2,-.9 .8,-.7 .8,.4 1.3,-.4 1.8,-2.1 3.8,-1.8 1.6,-2.4 .1,-.7 4.8,-4.4 -.1,-.5 -.9,-.8 1.1,-1.5 h .8 l .4,.5 .7,-.8 h 1.3 l .6,-1.5 2.3,-2.1 -.3,-5.4 .8,-2.3 3.6,-6.2 2.4,-2.2 2.2,-1.1 z"/><path class="sd" d="m 396.5,125.9 46,2.1 29.5,.4 -.1,2.2 -.9,2 -3.1,1.9 -.3,1.2 1.7,2.5 .4,1.8 2.6,.6 1.5,1.9 -.2,39.5 -2.2,-.1 -.1,1.6 1.3,1.5 -.1,1.1 -1,.5 .4,1.6 1.3,.4 .7,2 -1.7,5.1 -1,4.3 1.3,1.2 .3,1.3 .7,1.7 -1.5,.2 -1.8,-.7 -.9,-2.6 -1.2,-1.3 -6.1,-2.2 -.6,-1.1 -2,-.6 -1.4,.6 -1,-.5 -.9,.4 -.7,-.4 -.9,.4 -.7,-.5 -1,.7 -1.5,-.6 -1.8,2 -1.8,.1 -2.1,-2 -1.7,-.2 -3.4,-3.2 -38,-1.6 -51.1,-3.5 3.9,-43.9 2,-20.7 z"/><path class="tn" d="m 620.9,365.1 45.7,-4 22.9,-2.9 .1,-4.9 1.4,-1.3 1.5,.1 1.3,-.9 .8,-4.1 4.6,-3 3.6,-.5 3.2,-2.6 .5,-1.2 4.7,-2.4 .6,-3.4 4,-3.3 .8,.2 .1,1.5 .8,.8 1.5,-1.2 .7,-2.1 3.5,-2.5 2.6,1.1 2.4,-5.2 1.4,-1.2 1.5,.1 0,-5.2 .3,-.7 -4.6,.5 -.2,1 -28.9,3.3 -5.6,1.4 -20.5,1.4 -5.2,.8 -17.4,1 -2.6,.8 -22.6,2 -.7,-.6 h -3.7 l 1.2,3.2 -.6,.9 -23.3,1.5 -.8,1 -.8,-.7 h -1 v 1.3 l .6,1 -.1,1 -1.4,.5 1.4,1.5 -.8,.7 -1.7,-.2 .6,1 1.2,1.1 v .7 l -1.2,.5 -1,2 .1,.6 1.4,1 -.4,.7 h -1.5 v .5 l .9,.9 .1,.8 -1.4,.2 -.5,.8 -1.6,.2 -.9,.9 .6,.9 1.1,-.1 .5,.9 -1.6,1.3 .4,1.5 -2,-.6 -.1,.7 .4,1.1 -.3,1.4 -1.3,-.8 -.8,.8 1.1,.1 .1,1.5 -.6,1 1.1,.9 -.3,1.5 .8,.7 -.7,1 -1.2,-.5 -.9,2.2 -1.6,.7 z"/><path class="tx" d="m 282.3,429 .3,-3 34.4,3.6 31.8,2.6 7.9,-99.3 .8,0 52.6,3.2 -1.4,42.7 2.7,1.3 2.5,3 1.5,.3 1.1,-1 1.2,.4 1.4,1 1.1,-1.5 2.3,1.7 .5,2.9 1.2,.7 2.3,-.1 3.5,1.9 2,-.1 1.4,-.4 2.3,2.2 2,-2.3 3.5,1.1 1.9,3 2.3,-.1 -.7,2.1 2.3,1.1 3,-2.6 2.6,1.7 1.3,-.5 .1,1.5 1.7,1.2 2.3,-2.5 1.2,.7 -.3,2 1,1.8 1.2,-.8 2.5,-4.2 1.8,2 2,.5 2.1,-.7 2,1.8 1.2,-.1 1.3,1.2 3.6,-.9 .6,-1.7 3.7,-.3 1.6,.7 5,-2.5 .6,1.5 5.1,-.3 .5,-1.6 2.2,.9 4.6,3.8 6.4,1.9 2.6,2.3 2.8,-1.3 3.2,.8 .2,11.9 .5,19.9 .7,3.4 2.6,2.8 .7,5.4 3.8,4.6 .8,4.3 h 1 l -.1,7.3 -3.3,6.4 1.3,2.3 -1.3,1.5 .7,3 -.1,4.3 -2.2,3.5 -.1,.8 -1.7,1.2 1,1.8 1.2,1.1 -3.5,.3 -8.4,3.9 -3.5,1.4 -1.8,1.8 -.7,-.5 2.1,-2.3 1.8,-.7 .5,-.9 -2.9,-.1 -.7,-.8 .8,-2 -.9,-1.8 h -.6 l -2.4,1.3 -1.9,2.6 .3,1.7 3.3,3.4 1.3,.3 v .8 l -2.3,1.6 -4.9,4 -4,3.9 -3.2,1.4 -5,3 -3.7,2 -4.5,1.9 -4.1,2.5 3.2,-3 v -1.1 l .6,-.8 -.2,-1.8 -1.5,-.1 -1.1,1.5 -2.6,1.3 -1.8,-1.2 -.3,-1.7 h -1.5 l .8,2.2 1.4,.7 1.2,.9 1.8,1.6 -.7,.8 -3.9,1.7 -1.7,.1 -1.2,-1.2 -.5,2.1 .5,1.1 -2.7,2 -1.5,.2 -.8,.7 -.4,1.7 -1.8,3.3 -1.6,.7 -1.6,-.6 -1.8,1.1 .3,1.4 1.3,.8 1,.8 -1.8,3.5 -.3,2.8 -1,1.7 -1.4,1 -2.9,.4 1.8,.6 1.9,-.6 -.4,3.2 -1.1,-.1 .2,1.2 .3,1.4 -1.3,.9 v 3.1 l 1.6,1.4 .6,3.1 -.4,2.2 -1,.4 .4,1.5 1.1,.4 .8,1.7 v 2.6 l 1.1,2.1 2.2,2.6 -.1,.7 -2.2,-.2 -1.6,1.4 .2,1.4 -.9,-.3 -1.4,-.2 -3.4,-3.7 -2.3,-.6 h -7.1 l -2.8,-.8 -3.6,-3 -1.7,-1 -2.1,.1 -3.2,-2.6 -5.4,-1.6 v -1.3 l -1.4,-1.8 -.9,-4.7 -1.1,-1.7 -1.7,-1.4 v -1.6 l -1.4,-.6 .6,-2.6 -.3,-2.2 -1.3,-1.4 .7,-3 -.8,-3.2 -1.7,-1.4 h -1.1 l -4,-3.5 .1,-1.9 -.8,-1.7 -.8,-.2 -.9,-2.4 -2,-1.6 -2.9,-2.5 -.2,-2.1 -1,-.7 .2,-1.6 .5,-.7 -1.4,-1.5 .1,-.7 -2,-2.2 .1,-2.1 -2.7,-4.9 -.1,-1.7 -1.8,-3.1 -5.1,-4.8 v -1.1 l -3.3,-1.7 -.1,-1.8 -1.2,-.4 v -.7 l -.8,-.2 -2.1,-2.8 h -.8 l -.7,-.6 -1.3,1.1 h -2.2 l -2.6,-1.1 h -4.6 l -4.2,-2.1 -1.3,1.9 -2.2,-.6 -3.3,1.2 -1.7,2.8 -2,3.2 -1.1,4.4 -1.4,1.2 -1.1,.1 -.9,1.6 -1.3,.6 -.1,1.8 -2.9,.1 -1.8,-1.5 h -1 l -2,-2.9 -3.6,-.5 -1.7,-2.3 -1.3,-.2 -2.1,-.8 -3.4,-3.4 .2,-.8 -1.6,-1.2 -1,-.1 -3.4,-3.1 -.1,-2 -2.3,-4 .2,-1.6 -.7,-1.3 .8,-1.5 -.1,-2.4 -2.6,-4.1 -.6,-4.2 -1.6,-1.6 v -1 l -1.2,-.2 -.7,-1.1 -2.4,-1.7 -.9,-.1 -1.9,-1.6 v -1.1 l -2.9,-1.8 -.6,-2.1 -2.6,-2.3 -3.2,-4.4 -3,-1.3 -2.1,-1.8 .2,-1.2 -1.3,-1.4 -1.7,-3.7 -2.4,-1 z m 174.9,138.3 .8,.1 -.6,-4.8 -3.5,-12.3 -.2,-8.1 4.9,-10.5 6.1,-8.2 7.2,-5.1 v -.7 h -.8 l -2.6,1 -3.6,2.3 -.7,1.5 -8.2,11.6 -2.8,7.9 v 8.8 l 3.6,12 z"/><path class="ut" d="m 233.2,217.9 3.3,-21.9 -47.9,-8.2 -21,109 46.2,8.2 40,6 11.5,-88.3 z"/><path class="vt" d="m 859.1,102.4 -1.1,3.5 2.1,2.8 -.4,1.7 .1,1.3 -1.1,2.1 -1.4,.4 -.6,1.3 -2.1,1 -.7,1.5 1.4,3.4 -.5,2.5 .5,1.5 -1,1.9 .4,1.9 -1.3,1.9 .2,2.2 -.7,1.1 .7,4.5 .7,1.5 -.5,2.6 .9,1.8 -.2,2.5 -.5,1.3 -.1,1.4 2.1,2.6 -12.4,2.7 -1.1,-1 .5,-2 -3,-14.2 -1.9,-1.5 -.9,1.6 -.9,-2.2 .8,-1.8 -3.1,-6.7 .3,-3.8 .4,-1 -.6,-2 .4,-2.2 -2.2,-2.3 -.5,-3.2 .4,-1.5 -1.4,-.9 .6,-1.9 -.8,-1.7 27.3,-6.9 z"/><path class="va" d="m 834.7,265.4 -1.1,2.8 .5,1.1 .4,-1.1 .8,-3.1 z m -34.6,-7 -.7,-1 1,-.1 1,-.9 .4,-1.8 -.2,-.5 .1,-.5 -.3,-.7 -.6,-.5 -.4,-.1 -.5,-.4 -.6,-.6 h -1 l -.6,-.1 -.4,-.4 .1,-.5 -1.7,-.6 -.8,.3 -1.2,-.1 -.7,-.7 -.5,-.2 -.2,-.7 .6,-.8 v -.9 l -1.2,-.2 -1,-.9 -.9,.1 -1.6,-.3 -.4,.7 -.4,1.6 -.5,2.3 -10,-5.2 -.2,.9 .9,1.6 -.8,2.3 .1,2.9 -1.2,.8 -.5,2.1 -.9,.8 -1.4,1.8 -.9,.8 -1,2.5 -2.4,-1.1 -2.3,8.5 -1.3,1.6 -2.8,-.5 -1.3,-1.9 -2.3,-.7 -.1,4.7 -1.4,1.7 .4,1.5 -2.1,2.2 .4,1.9 -3.7,6.3 -1,3.3 1.5,1.2 -1.5,1.9 .1,1.4 -2.3,2 -.7,-1.1 -4.3,3.1 -1.5,-1 -.6,1.4 .8,.5 -.5,.9 -5.5,2.4 -3,-1.8 -.8,1.7 -1.9,1.8 -2.3,.1 -4.4,-2.3 -.1,-1.5 -1.5,-.7 .8,-1.2 -.7,-.6 -4.9,6.6 -2.9,1 -3,3 -.4,2.2 -2.1,1.3 -.1,1.7 -1.4,1.4 -1.8,.5 -.5,1.9 -1,.4 -6.9,4.2 28.9,-3.3 .2,-1 4.6,-.5 -.3,.7 29.4,-3.5 39.4,-7.3 29.1,-6.1 -.6,-1.2 .4,-.1 .9,.9 -.1,-1.4 -.3,-1.9 1.6,1.2 .9,2.1 v -1.3 l -3.4,-5.5 v -1.2 l -.7,-.8 -1.3,.7 .5,1.4 h -.8 l -.4,-1 -.6,.9 -.9,-1.1 -2.1,-.1 -.2,.7 1.5,2.1 -1.4,-.7 -.5,-1 -.4,.8 -.8,.1 -1.5,1.7 .3,-1.6 v -1.4 l -1.5,-.7 -1.8,-.5 -.2,-1.7 -.6,-1.3 -.6,1.1 -1.7,-1 -2,.3 .2,-.9 1.5,-.2 .9,.5 1.7,-.8 .9,.4 .5,1 v .7 l 1.9,.4 .3,.9 .9,.4 .9,1.2 1.4,-1.6 h .6 l -.1,-2.1 -1.3,1 -.6,-.9 1.5,-.2 -1.2,-.9 -1.2,.6 -.1,-1.7 -1.7,.2 -2.2,-1.1 -1.8,-2.2 3.6,2.2 .9,.3 1.7,-.8 -1.7,-.9 .6,-.6 -1,-.5 .8,-.2 -.3,-.9 1.1,.9 .4,-.8 .4,1.3 1.2,.8 .6,-.5 -.5,-.6 -.1,-2.5 -1.1,-.1 -1.6,-.8 .9,-1.1 -2,-.1 -.4,-.5 -1.4,.6 -1.4,-.8 -.5,-1.2 -2.1,-1.2 -2.1,-1.8 -2.2,-1.9 3,1.3 .9,1.2 2.1,.7 2.3,2.5 .2,-1.7 .6,1.3 2.3,.5 v -4 l -.8,-1.1 1.1,.4 .1,-1.6 -3.1,-1.4 -1.6,-.2 -1.3,-.2 .3,-1.2 -1.5,-.3 -.1,-.6 h -1.8 l -.2,.8 -.7,-1 h -2.7 l -1,-.4 -.2,-1 -1.2,-.6 -.4,-1.5 -.6,-.4 -.7,1.1 -.9,.2 -.9,.7 h -1.5 l -.9,-1.3 .4,-3.1 .5,-2.4 .6,.5 z m 21.9,11.6 .9,-.1 0,-.6 -.8,.1 z m 7.5,14.2 -1,2.7 1.2,-1.3 z m -1.8,-15.3 .7,.3 -.2,1.9 -.5,-.5 -1.3,1 1,.4 -1.8,4.4 .1,8.1 1.9,3.1 .5,-1.5 .4,-2.7 -.3,-2.3 .7,-.9 -.2,-1.4 1.2,-.6 -.6,-.5 .5,-.7 .8,1.1 -.2,1.1 -.4,3.9 1.1,-2.2 .4,-3.1 .1,-3 -.3,-2 .6,-2.3 1.1,-1.8 .1,-2.2 .3,-.9 -4.6,1.6 -.7,.8 z"/><path class="wa" d="m 161.9,83.6 .7,4 -1.1,4.3 -30.3,-7.3 -2.8,1 -5.4,-.9 -1.8,-.9 -1.5,1.2 -3.3,-.4 -4.5,.5 -.9,.7 -4.2,-.4 -.8,-1.6 -1.2,-.2 -4.4,1.3 -1.6,-1.1 -2.2,.8 -.2,-1.8 -2.3,-1.2 -1.5,-.2 -1,-1.1 -3,.3 -1.2,-.8 h -1.2 l -1.2,.9 -5.5,.7 -6.6,-4.2 1.1,-5.6 -.4,-4.1 -3.2,-3.7 -3.7,.1 -.4,-1.1 .4,-1.2 -.7,-.8 -1,.1 -2.1,-1.5 -1.2,.4 -2,-.1 -.7,-1.5 -1.6,-.3 2.5,-7.5 -.7,6 .5,.5 v -2 l .8,-.2 1.1,2.3 -.5,-2.2 1.2,-4.2 1.8,.4 -1.1,-2 -1,.3 -1.5,-.4 .2,-4.2 .2,1.5 .9,.5 .6,-1.6 h 3.2 l -2.2,-1.2 -1.7,-1.9 -1.4,1.6 1.2,-3.1 -.3,-4.6 -.2,-3.6 .9,-6.1 -.5,-2 -1.4,-2.1 .1,-4 .4,-2.7 2,-2.3 -.7,-1.4 .2,-.6 .9,.1 7.8,7.6 4.7,1.9 5.1,2.5 3.2,-.1 .2,3 1,-1.6 h .7 l .6,2.7 .5,-2.6 1.4,-.2 .5,.7 -1.1,.6 .1,1.6 .7,-1.5 h 1.1 l -.4,2.6 -1.1,-.8 .4,1.4 -.1,1.5 -.8,.7 -2.5,2.9 1.2,-3.4 -1.6,.4 -.4,2.1 -3.8,2.8 -.4,1 -2.1,2.2 -.1,1 h 2.2 l 2.4,-.2 .5,-.9 -3.9,.5 v -.6 l 2.6,-2.8 1.8,-.8 1.9,-.2 1,-1.6 3,-2.3 v -1.4 h 1.1 l .1,4 h -1.5 l -.6,.8 -1.1,-.9 .3,1.1 v 1.7 l -.7,.7 -.3,-1.6 -.8,.8 .7,.6 -.9,1.1 h 1.3 l .7,-.5 .1,2 -1,1.9 -.9,1 -.1,1.8 -1,-.2 -.2,-1.4 .9,-1.1 -.8,-.5 -.8,.7 -.7,2.2 -.8,.9 -.1,-2 .8,-1.1 -.2,-1.1 -1.2,1.2 .1,2.2 -.6,.4 -2.1,-.4 -1.3,1.2 2.2,-.6 -.2,2.2 1,-1.8 .4,1.4 .5,-1 .7,1.8 h .7 l .7,-.8 .6,-.1 2,-1.9 .2,-1.2 .8,.6 .3,.9 .7,-.3 .1,-1.2 h 1.3 l .2,-2.9 -.1,-2.7 .9,.3 -.7,-2.1 1.4,-.8 .2,-2.4 2.3,-2.2 1,.1 .3,-1.4 -1.2,-1.4 -.1,-3.5 -.8,.9 .7,2.9 -.6,.1 -.6,-1.9 -.6,-.5 .3,-2.3 1.8,-.1 .3,.7 .3,-1.6 -1.6,-1.7 -.6,-1.6 -.2,2 .9,1.1 -.7,.4 -1,-.8 -1.8,1.3 1.5,.5 .2,2.4 -.3,1.8 .9,-1.3 1.4,2.3 -.4,1.9 h -1.5 v -1.2 l -1.5,-1.2 .5,-3 -1.9,-2.6 2.7,-3 .6,-4.1 h .9 l 1.4,3.2 v -2.6 l 1.2,.3 v -3.3 l -.9,-.8 -1.2,2.5 -1,-3 1.3,-.1 -1.5,-4.9 1.9,-.6 25.4,7.5 31.7,8 23.6,5.5 z m -78.7,-39.4 h .5 l .1,.8 -.5,.3 .1,.6 -.7,.4 -.2,-.9 .5,-.4 z m 5,-4.3 -1.2,1.9 -.1,.8 .4,.2 .5,-.6 1.1,.1 z m -.4,-21.6 .5,.6 1.3,-.3 .2,-1 1.2,-1.8 -1,-.4 -.7,1.6 -.1,-1.6 -1.1,.2 -.7,1.4 z m 3.2,-5.5 .7,1.5 -.9,.2 -.8,.4 -.2,-2.4 z m -2.7,-1.6 -1.1,-.2 .5,1.4 z m -1,2.5 .8,.4 -.4,1.1 1.7,-.5 -.2,-2.2 -.9,-.2 z m -2.7,-.4 .3,2.7 1.6,1.3 .6,-1.9 -1.1,-2.2 z m 1.9,-1.1 -1.1,-1 -.9,.1 1.8,1.5 z m 3.2,-7 h -1.2 v .8 l 1.2,.6 z m -.9,32.5 .4,-2.7 h -1.1 l -.2,1.9 z"/><path class="wv" d="m 723.4,297.5 -.8,1.2 1.5,.7 .1,1.5 4.4,2.3 2.3,-.1 1.9,-1.8 .8,-1.7 3,1.8 5.5,-2.4 .5,-.9 -.8,-.5 .6,-1.4 1.5,1 4.3,-3.1 .7,1.1 2.3,-2 -.1,-1.4 1.5,-1.9 -1.5,-1.2 1,-3.3 3.7,-6.3 -.4,-1.9 2.1,-2.2 -.4,-1.5 1.4,-1.7 .1,-4.7 2.3,.7 1.3,1.9 2.8,.5 1.3,-1.6 2.3,-8.5 2.4,1.1 1,-2.5 .9,-.8 1.4,-1.8 .9,-.8 .5,-2.1 1.2,-.8 -.1,-2.9 .8,-2.3 -.9,-1.6 .2,-.9 10,5.2 .5,-2.3 .4,-1.6 .4,-.7 -.9,-.4 .2,-1.6 -1,-.5 -.2,-.7 h -.7 l -.8,-1.2 .2,-1 -2.6,.4 -2.2,-1.6 -1.4,.3 -.9,1.4 h -1.3 l -1.7,2.9 -3.3,.4 -1.9,-1 -2.6,3.8 -2.2,-.3 -3.1,3.9 -.9,1.6 -1.8,1.6 -1.7,-11.4 -17.4,2.9 -3.2,-19.7 -2.2,1.2 1.4,2.1 -.1,2.2 .6,2 -1.1,3.4 -.1,5.4 -1,3.6 .5,1.1 -.4,2.2 -1.1,.5 -2,3.3 -1.8,2 h -.6 l -1.8,1.7 -1.3,-1.2 -1.5,1.8 -.3,1.2 h -1.3 l -1.3,2.2 .1,2.1 -1,.5 1.4,1.1 v 1.9 l -1,.2 -.7,.8 -1,.5 -.6,-2.1 -1.6,-.5 -1,2.3 -.3,2.2 -1.1,1.3 1.3,3.6 -1.5,.8 -.4,3.5 h -1.5 l -3.2,1.4 -.1,1.1 .6,1 -.6,3.6 1.9,1.6 .8,1.1 1,.6 -.1,.9 4.4,5.6 h 1.4 l 1.5,1.8 1.2,.3 1.4,-.1 z"/><path class="wi" d="m 611,144 -2.9,.8 .2,2.3 -2.4,3.4 -.2,3.1 .6,.7 .8,-.7 .5,-1.6 2,-1.1 1.6,-4.2 3.5,-1.1 .8,-3.3 .7,-.9 .4,-2.1 1.8,-1.1 v -1.5 l 1,-.9 1.4,.1 v 2 l -1,.1 .5,1.2 -.7,2.2 -.6,.1 -1.2,4.5 -.7,.5 -2.8,7.2 -.3,4.2 .6,2 .1,1.3 -2.4,1.9 .3,1.9 -.9,3.1 .3,1.6 .4,3.7 -1.1,4.1 -1.5,5 1,1.5 -.3,.3 .8,1.7 -.5,1.1 1.1,.9 v 2.7 l 1.3,1.5 -.4,3 .3,4 -45.9,2.8 -1.3,-2.8 -3.3,-.7 -2.7,-1.5 -2,-5.5 .1,-2.5 1.6,-3.3 -.6,-1.1 -2.1,-1.6 -.2,-2.6 -1.1,-4.5 -.2,-3 -2.2,-3 -2.8,-.7 -5.2,-3.6 -.6,-3.3 -6.3,-3.1 -.2,-1.3 h -3.3 l -2.2,-2.6 -2,-1.3 .7,-5.1 -.9,-1.6 .5,-5.4 1,-1.8 -.3,-2.7 -1.2,-1.3 -1.8,-.3 v -1.7 l 2.8,-5.8 5.9,-3.9 -.4,-13 .9,.4 .6,-.5 .1,-1.1 .9,-.6 1.4,1.2 .7,-.1 h 2.6 l 6.8,-2.6 .3,-1 h 1.2 l .7,-1.2 .4,.8 1.8,-.9 1.8,-1.7 .3,.5 1,-1 2.2,1.6 -.8,1.6 -1.2,1.4 .5,1.5 -1.4,1.6 .4,.9 2.3,-1.1 v -1.4 l 3.3,1.9 1.9,.7 1.9,.7 3,3.8 17,3.8 1.4,1 4,.8 .7,.5 2.8,-.2 4.9,.8 1.4,1.5 -1,1 .8,.8 3.8,.7 1.2,1.2 .1,4.4 -1.3,2.8 2,.1 1,-.8 .9,.8 -1.1,3.1 1,1.6 1.2,.3 z m -49.5,-37.3 -.5,.1 -1.5,1.6 .2,.5 1.5,-.6 v -.6 l .9,-.3 z m 1.6,-1.1 -1,.3 -.2,.7 .9,-.1 z m -1.3,-1.6 -.2,.9 h 1.7 l .6,-.4 .1,-1 z m 2.8,-3 -.3,1.9 1.2,-.5 .1,-1.4 z m 58.3,31.9 -2,.3 -.4,1.3 1.3,1.7 z"/><path class="wy" d="m 355.3,143.7 -51,-5.3 -57.3,-7.9 -2,10.7 -8.5,54.8 -3.3,21.9 32.1,4.8 44.9,5.7 37.5,3.4 3.7,-44.2 z"/><path class="dc" d="m 803.5,252 -2.6,-1.8 -1,1.7 .5,.4 .4,.1 .6,.5 .3,.7 -.1,.5 .2,.5 z"/></svg>
+    <div class="territory-list">
+      <div class="section-label" style="margin-bottom:10px">Top &amp; territories</div>
+      <div id="state-top-list"></div>
+    </div>
+  </div>
+  <div class="map-scale" id="map-scale"></div>
+</section>
+
+<section class="section" id="sec-habitat">
+  <div class="section-label">Habitat</div>
+  <h2 class="h serif">How much ground the law has drawn a line around</h2>
+  <p class="body">Beyond protecting the animal or plant itself, the Fish and Wildlife Service can designate <b>critical habitat</b> &mdash; specific mapped land or water the species needs to recover, where federal agencies must avoid destroying it. <span class="fig" id="ch-count">&mdash;</span> such designations are on record for species tracked on this page. Ranked by acreage, a few dwarf the rest:</p>
+  <div class="barlist" id="habitat-bars"></div>
+  <p class="note">Acreage above is parsed from each designation's own recorded measurement text and is not itself a sum of unique acres &mdash; overlapping designations for the same range are not deduplicated.</p>
+</section>
+
+<section class="section" id="sec-fyr">
+  <div class="section-label">Checking back in</div>
+  <h2 class="h serif">The five-year review</h2>
+  <p class="body">The Act requires FWS and NOAA Fisheries to formally revisit every listed species at least once every five years and ask whether its status still fits the evidence. <span class="fig" id="fyr-count">&mdash;</span> completed reviews are on record. The honest headline: <span class="fig" id="fyr-nochange-pct">&mdash;</span> of them concluded "no change in status" &mdash; the review process mostly confirms what was already known, not a steady drumbeat of upgrades and downgrades.</p>
+  <div class="barlist" id="fyr-bars"></div>
+</section>
+
+<section class="section" id="sec-explorer">
+  <div class="section-label">The full record</div>
+  <h2 class="h serif">Every entity, searchable</h2>
+  <p class="body">Search by common or scientific name, or filter by group, status, managing agency, range, or the decade it was first listed. Click any row to open its full history &mdash; delisting and reclassification dates, five-year reviews, critical habitat designations and recovery plans, each linking to the government's own document.</p>
+  <div class="filters">
+    <input type="text" id="f-q" placeholder="Search common or scientific name&hellip;">
+    <select id="f-group"><option value="">All groups</option></select>
+    <select id="f-status">
+      <option value="">All statuses</option>
+      <option value="Endangered">Endangered</option>
+      <option value="Threatened">Threatened</option>
+      <option value="Experimental Population, Non-Essential">Experimental population</option>
+      <option value="Similarity of Appearance (Threatened)">Similarity of appearance</option>
+      <option value="Delisted">Delisted (any reason)</option>
+    </select>
+    <select id="f-agency"><option value="">Any agency</option><option value="FWS">FWS</option><option value="NMFS">NMFS</option><option value="FWS and NMFS">FWS &amp; NMFS</option></select>
+    <select id="f-country"><option value="">Domestic &amp; foreign</option><option value="Domestic">Domestic only</option><option value="Foreign">Foreign only</option><option value="Both Domestic and Foreign">Both</option></select>
+  </div>
+  <div class="count-readout" id="explorer-count"></div>
+  <table class="explorer">
+    <thead><tr>
+      <th data-k="cn">Common name</th><th data-k="sn">Scientific name</th><th data-k="group">Group</th>
+      <th data-k="status">Status</th><th data-k="agency">Agency</th><th data-k="listing_date">Listed</th>
+    </tr></thead>
+    <tbody id="explorer-body"></tbody>
+  </table>
+  <button class="show-more" id="show-more" style="display:none">Show more</button>
+</section>
+
+<section class="section narrow" id="methodology">
+  <div class="section-label">Methods &amp; limits</div>
+  <h2 class="h serif">What this page can and can't tell you</h2>
+  <p class="body">Every number on this page comes from live queries against the Fish and Wildlife Service's ECOSphere reporting API (<code>ecos.fws.gov</code>), fetched fresh at build time &mdash; not a static export someone else cleaned first. The endpoints are undocumented; they were found by watching the network traffic of FWS's own public report pages and are as likely to break as any unversioned government API. The fetch and merge scripts are in this project's <code>src/</code> folder.</p>
+  <p class="body">A few specific traps, found the hard way while building this:</p>
+  <ul>
+    <li class="body"><b>"Listed species" and "listing entities" are not the same count.</b> A single species can be listed more than once under different Distinct Population Segments with different statuses in different places &mdash; the gray wolf spotlighted above is one species with six active or historical entries. This page is built around entities, the government's own unit of record, and says so wherever the two counts might be confused.</li>
+    <li class="body"><b>Reclassification history doesn't join cleanly.</b> The reclassification report and the master species table describe the same population in different words in a small number of cases &mdash; a short label ("Western DPS") in one, a full range description in the other. This build resolves the difference two ways: a lookup through a third report that carries both forms, and a last-resort word-overlap match for the handful that still don't agree. <span id="reclass-match-note"></span></li>
+    <li class="body"><b>27 listing entities in this dataset carry no listing date</b> at all in FWS's own export, almost all older foreign listings with incomplete records. They're excluded from every date-based chart on this page, and shown as "date not recorded" in the explorer.</li>
+    <li class="body"><b>Critical habitat acreage is not additive.</b> The figures in the habitat section are parsed from each designation's own recorded text and can overlap across amendments to the same designation.</li>
+    <li class="body">This page tracks species with a status of <b>Listed</b> or <b>Delisted</b> only. Candidates, proposed listings, and species considered and rejected are real parts of the process but are out of scope for the main explorer; a handful are referenced in passing above.</li>
+  </ul>
+  <p class="body">The Endangered Species Act's own text and every Federal Register notice cited here are public record. Data pulled from FWS ECOS and NOAA Fisheries is a work of the United States Government and carries no copyright restriction in the U.S.</p>
+</section>
+
+</div>
+
+<footer>
+  <div class="src">Species listings, delistings, reclassifications, five-year reviews, critical habitat and recovery plans: <a href="https://ecos.fws.gov/ecp/" target="_blank" rel="noopener">U.S. Fish &amp; Wildlife Service, ECOSphere</a> (Environmental Conservation Online System), fetched live at build time. Public domain, U.S. Government work.</div>
+  <div class="src">Marine and anadromous species jurisdiction cross-checked against <a href="https://www.fisheries.noaa.gov/species-directory/threatened-endangered" target="_blank" rel="noopener">NOAA Fisheries' ESA Species Directory</a>. Public domain, U.S. Government work.</div>
+  <div class="src">Blank U.S. state map: <a href="https://commons.wikimedia.org/wiki/File:Blank_US_Map_(states_only).svg" target="_blank" rel="noopener">Wikimedia Commons</a>, released CC0 (public domain).</div>
+  <div class="src" style="margin-top:10px">Built <span id="built-date-2">&mdash;</span> &middot; <a href="https://github.com/TNRiley/wherever-found" target="_blank" rel="noopener">source &amp; rebuild notes</a></div>
+</footer>
+
+</div>
+
+<script id="payload-b64" type="application/octet-stream">__PAYLOAD_B64GZ__</script>
+<script>
+(function(){
+  var root = document.documentElement;
+  var stored = null;
+  try{ stored = localStorage.getItem('wf-theme'); }catch(e){}
+  if(stored) root.setAttribute('data-theme', stored);
+  document.getElementById('themebtn').addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme');
+    var next = cur === 'dark' ? 'light' : (cur === 'light' ? null : (matchMedia('(prefers-color-scheme:dark)').matches ? 'light' : 'dark'));
+    if(next) root.setAttribute('data-theme', next); else root.removeAttribute('data-theme');
+    try{ localStorage.setItem('wf-theme', next || ''); }catch(e){}
+  });
+})();
+
+var CAT = ['#c1','#c2','#c3','#c4','#c5','#c6','#c7','#c8'].map(function(v){
+  return getComputedStyle(document.documentElement).getPropertyValue('--'+v.slice(1)).trim();
+});
+function cssvar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+function fmt(n){ return n.toLocaleString('en-US'); }
+function pct(n,d){ return d ? Math.round(1000*n/d)/10 + '%' : '—'; }
+function esc(s){ return (s==null?'':String(s)).replace(/[&<>]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
+
+async function loadPayload(){
+  var b64 = document.getElementById('payload-b64').textContent.trim();
+  var bin = atob(b64);
+  var bytes = new Uint8Array(bin.length);
+  for(var i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
+  var ds = new DecompressionStream('gzip');
+  var stream = new Blob([bytes]).stream().pipeThrough(ds);
+  var buf = await new Response(stream).arrayBuffer();
+  return JSON.parse(new TextDecoder().decode(buf));
+}
+
+loadPayload().then(init).catch(function(err){
+  document.getElementById('stat-row').innerHTML = '<div class="loading">Could not load data: '+esc(err.message)+'</div>';
+  console.error(err);
+});
+
+function init(DATA){
+  document.getElementById('built-date').textContent = DATA.generated;
+  document.getElementById('built-date-2').textContent = DATA.generated;
+
+  var species = DATA.species;
+  var listed = species.filter(function(s){ return s.status_category === 'Listed'; });
+  var delisted = species.filter(function(s){ return s.status_category === 'Delisted'; });
+
+  function delistBucket(s){
+    if(s.status === 'Recovery') return 'Recovery';
+    if(s.status === 'Extinction') return 'Extinction';
+    return 'Administrative error';
+  }
+
+  // ---------- hero stats ----------
+  var distinctListedSid = new Set(listed.map(function(s){return s.sid;})).size;
+  document.getElementById('stat-row').innerHTML = [
+    stat(fmt(listed.length), listed.length.toLocaleString()+' listing entities currently protected ('+fmt(distinctListedSid)+' distinct species/populations)'),
+    stat(fmt(delisted.length), 'ever delisted &mdash; '+pct(delisted.filter(function(s){return delistBucket(s)==='Recovery'}).length, delisted.length)+' of them for recovery'),
+    stat(fmt(listed.filter(function(s){return s.agency.indexOf('NMFS')>=0;}).length), 'led wholly or jointly by NOAA Fisheries (marine &amp; migratory)'),
+    stat(fmt(listed.filter(function(s){return s.group==='Flowering Plants';}).length), 'flowering plants &mdash; the single largest group listed, more than all mammals and birds combined')
+  ].join('');
+  function stat(v,l){ return '<div class="stat"><div class="v mono">'+v+'</div><div class="l">'+l+'</div></div>'; }
+
+  document.getElementById('app').style.display = '';
+
+  // ---------- timeline ----------
+  (function(){
+    var byYear = {};
+    species.forEach(function(s){
+      if(!s.listing_date) return;
+      var y = +s.listing_date.slice(0,4);
+      byYear[y] = (byYear[y]||0)+1;
+    });
+    var years = Object.keys(byYear).map(Number).sort(function(a,b){return a-b;});
+    var minY = Math.min.apply(null, years), maxY = Math.max.apply(null, years);
+    var full = [];
+    for(var y=minY;y<=maxY;y++) full.push({y:y, n:byYear[y]||0});
+    var canvas = document.getElementById('timeline-canvas');
+    var tip = document.getElementById('timeline-tip');
+    function draw(){
+      var dpr = window.devicePixelRatio||1;
+      var w = canvas.clientWidth, h = 260;
+      canvas.width = w*dpr; canvas.height = h*dpr;
+      var ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      ctx.clearRect(0,0,w,h);
+      var padL=34, padB=24, padT=10, padR=6;
+      var plotW = w-padL-padR, plotH = h-padT-padB;
+      var maxN = Math.max.apply(null, full.map(function(d){return d.n;}));
+      var bw = plotW/full.length;
+      var ink = cssvar('--muted'), line = cssvar('--line'), accent = cssvar('--accent');
+      ctx.strokeStyle = line; ctx.lineWidth=1;
+      for(var g=0;g<=4;g++){
+        var gy = padT + plotH - (plotH*g/4);
+        ctx.beginPath(); ctx.moveTo(padL,gy); ctx.lineTo(w-padR,gy); ctx.stroke();
+        ctx.fillStyle = ink; ctx.font='11px "IBM Plex Mono",monospace'; ctx.textAlign='right'; ctx.textBaseline='middle';
+        ctx.fillText(Math.round(maxN*g/4), padL-6, gy);
+      }
+      full.forEach(function(d,i){
+        var x = padL + i*bw;
+        var bh = maxN? (d.n/maxN)*plotH : 0;
+        ctx.fillStyle = (d.y===1973) ? cssvar('--gold') : accent;
+        ctx.fillRect(x+0.5, padT+plotH-bh, Math.max(bw-1,0.6), bh);
+      });
+      ctx.fillStyle = ink; ctx.font='10.5px "IBM Plex Mono",monospace'; ctx.textAlign='center'; ctx.textBaseline='top';
+      for(var yr=Math.ceil(minY/10)*10; yr<=maxY; yr+=10){
+        var idx = yr-minY;
+        var x = padL + idx*bw + bw/2;
+        ctx.fillText(yr, x, padT+plotH+6);
+      }
+      canvas._geom = {padL:padL,bw:bw,full:full};
+    }
+    draw();
+    window.addEventListener('resize', draw);
+    canvas.addEventListener('mousemove', function(e){
+      var geom = canvas._geom; if(!geom) return;
+      var rect = canvas.getBoundingClientRect();
+      var x = e.clientX-rect.left;
+      var idx = Math.floor((x-geom.padL)/geom.bw);
+      var d = geom.full[idx];
+      if(!d){ tip.style.opacity=0; return; }
+      tip.style.opacity=1;
+      tip.style.left = Math.min(x+8, rect.width-140)+'px';
+      tip.style.top = '6px';
+      tip.textContent = d.y+': '+d.n+' listed'+(d.y===1973?' — ESA signed':'');
+    });
+    canvas.addEventListener('mouseleave', function(){ tip.style.opacity=0; });
+  })();
+
+  // ---------- status bars ----------
+  (function(){
+    var order = [
+      ['Endangered', CAT[7]],
+      ['Threatened', CAT[3]],
+      ['Experimental Population, Non-Essential', CAT[0]],
+      ['Similarity of Appearance (Threatened)', CAT[4]]
+    ];
+    var counts = {}; listed.forEach(function(s){ counts[s.status]=(counts[s.status]||0)+1; });
+    var max = Math.max.apply(null, order.map(function(o){return counts[o[0]]||0;}));
+    document.getElementById('status-bars').innerHTML = order.map(function(o){
+      var n = counts[o[0]]||0;
+      return '<div class="row"><div class="lab">'+shortStatus(o[0])+'</div><div class="track"><div class="fill" style="width:'+(100*n/max)+'%;background:'+o[1]+'"></div></div><div class="n mono">'+fmt(n)+'</div></div>';
+    }).join('');
+    function shortStatus(s){
+      return {'Endangered':'Endangered','Threatened':'Threatened','Experimental Population, Non-Essential':'Experimental population','Similarity of Appearance (Threatened)':'Similarity of appearance'}[s]||s;
+    }
+  })();
+
+  // ---------- delisting reasons ----------
+  (function(){
+    var buckets = {Recovery:[], Extinction:[], 'Administrative error':[]};
+    delisted.forEach(function(s){ buckets[delistBucket(s)].push(s); });
+    var colors = {Recovery: CAT[2], Extinction: CAT[1], 'Administrative error': CAT[0]};
+    var examples = {
+      Recovery: ['Bald Eagle (2007)','Louisiana Black Bear (2016)','Gray wolf, Northern Rocky Mtn DPS (2017)'],
+      Extinction: ['Amistad gambusia (1980)',"Bachman's warbler (1967 listing, since extinct)"],
+      'Administrative error': ['Arizona agave (data error)','Bahama swallowtail butterfly (Act amendment)']
+    };
+    document.getElementById('reason-grid').innerHTML = Object.keys(buckets).map(function(k){
+      return '<div class="reason-card"><div class="n mono" style="color:'+colors[k]+'">'+buckets[k].length+'</div><div class="t">'+k+'</div><div class="ex">'+examples[k].join('<br>')+'</div></div>';
+    }).join('');
+    document.getElementById('delist-total').textContent = fmt(delisted.length);
+    document.getElementById('delist-recovery-pct').textContent = pct(buckets.Recovery.length, delisted.length);
+    document.getElementById('delist-extinct-pct').textContent = pct(buckets.Extinction.length, delisted.length);
+
+    var ibw = species.find(function(s){ return s.sn === 'Campephilus principalis'; });
+    document.getElementById('ibw-callout').innerHTML = '<b>The one that got away from this bucket &mdash; so far.</b> The Ivory-billed Woodpecker is still officially <b>'+(ibw?ibw.status:'Endangered')+'</b> in FWS\'s live database. The Service proposed declaring it extinct in 2021, then formally withdrew that proposal in 2024 after new, unconfirmed acoustic and visual evidence from Louisiana. It remains on the list, neither recovered nor declared gone.';
+  })();
+
+  // ---------- reclassification ----------
+  (function(){
+    var events = [];
+    species.forEach(function(s){
+      (s.reclassifications||[]).forEach(function(r){
+        events.push({date:r.date, to:r.to_status, cn:s.cn, sn:s.sn, pop:s.pop});
+      });
+    });
+    events.sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
+    document.getElementById('recl-count').textContent = fmt(events.length);
+    document.getElementById('reclass-match-note').textContent = '';
+    document.getElementById('reclass-list').innerHTML = events.slice(0,20).map(function(e){
+      var up = e.to === 'E';
+      var popTxt = (e.pop && !/^wherever found$/i.test(e.pop)) ? esc(e.pop) : esc(e.sn);
+      return '<div class="recl-row"><div class="mono">'+(e.date||'—')+'</div><div class="dir" style="color:'+(up?CAT[7]:CAT[2])+'">'+(up?'&#8593;':'&#8595;')+'</div>'+
+        '<div><b>'+esc(e.cn)+'</b> <span class="sn">'+popTxt+'</span></div><div class="st">to '+(e.to==='E'?'Endangered':'Threatened')+'</div></div>';
+    }).join('') || '<p class="body note">No dated reclassification events matched to specific entities in this build.</p>';
+
+    var wolves = species.filter(function(s){ return s.sn.indexOf('Canis lupus')===0; });
+    document.getElementById('wolf-callout').innerHTML = '<b>Canis lupus, right now, depending where you stand:</b><ul style="margin:10px 0 0;padding-left:18px">' +
+      wolves.map(function(w){ return '<li><b>'+esc(w.status)+'</b> &mdash; '+esc(w.cn)+', '+esc(w.pop||'—')+'</li>'; }).join('') +
+      '</ul>The same species, one Federal Register\'s worth of law, six different legal realities depending on which side of a state line the wolf is standing on.';
+  })();
+
+  // ---------- agency ----------
+  (function(){
+    var order = [['FWS',CAT[0]],['NMFS',CAT[1]],['FWS and NMFS',CAT[2]]];
+    var counts = {}; listed.forEach(function(s){ counts[s.agency]=(counts[s.agency]||0)+1; });
+    var max = Math.max.apply(null, order.map(function(o){return counts[o[0]]||0;}));
+    document.getElementById('agency-bars').innerHTML = order.map(function(o){
+      var n = counts[o[0]]||0;
+      return '<div class="row"><div class="lab">'+(o[0]==='FWS and NMFS'?'FWS & NMFS jointly':o[0])+'</div><div class="track"><div class="fill" style="width:'+(100*n/max)+'%;background:'+o[1]+'"></div></div><div class="n mono">'+fmt(n)+'</div></div>';
+    }).join('');
+
+    var spotlightSn = ['Eubalaena glacialis','Caretta caretta','Chelonia mydas','Acipenser oxyrinchus oxyrinchus','Balaenoptera musculus','Dermochelys coriacea'];
+    var seen = {};
+    var picks = [];
+    spotlightSn.forEach(function(sn){
+      var m = listed.find(function(s){ return s.sn===sn && !seen[s.sid]; });
+      if(m){ seen[m.sid]=1; picks.push(m); }
+    });
+    document.getElementById('migratory-cards').innerHTML = picks.map(function(s){
+      return '<div class="card"><h4>'+esc(s.cn)+'</h4><span class="sn">'+esc(s.sn)+'</span>'+
+        '<div class="row"><span>Status</span><b>'+esc(s.status)+'</b></div>'+
+        '<div class="row"><span>Agency</span><b>'+esc(s.agency)+'</b></div>'+
+        '<div class="row"><span>Range</span><b style="text-align:right;max-width:60%">'+esc(s.country)+'</b></div>'+
+        '<div class="row"><span>Listed</span><b>'+esc(s.listing_date||'—')+'</b></div></div>';
+    }).join('');
+  })();
+
+  // ---------- state map ----------
+  (function(){
+    var byState = DATA.by_state.slice().sort(function(a,b){ return b.count-a.count; });
+    var counts = {}; byState.forEach(function(r){ counts[r.abbrev.toLowerCase()] = r.count; });
+    var svg = document.getElementById('us-map');
+    var paths = svg.querySelectorAll('path');
+    var vals = byState.map(function(r){return r.count;});
+    var max = Math.max.apply(null, vals), min = Math.min.apply(null, vals);
+    var ramp = ['#cde2fb','#9ec5f4','#5598e7','#256abf','#104281'];
+    if(document.documentElement.getAttribute('data-theme')==='dark' || (matchMedia('(prefers-color-scheme:dark)').matches && document.documentElement.getAttribute('data-theme')!=='light')){
+      ramp = ['#0d366b','#184f95','#2a78d6','#6da7ec','#b7d3f6'];
+    }
+    function colorFor(n){
+      if(n==null) return cssvar('--sunk');
+      var t = (n-min)/(max-min||1);
+      var i = Math.min(ramp.length-1, Math.floor(t*ramp.length));
+      return ramp[i];
+    }
+    var tip = document.createElement('div');
+    tip.className='tooltip'; tip.style.position='fixed';
+    document.body.appendChild(tip);
+    var nameByAbbrev = {}; byState.forEach(function(r){ nameByAbbrev[r.abbrev.toLowerCase()] = r.state; });
+    paths.forEach(function(p){
+      var cls = p.getAttribute('class');
+      var n = counts[cls];
+      p.style.fill = colorFor(n);
+      p.addEventListener('mousemove', function(e){
+        tip.style.opacity=1; tip.style.left=(e.clientX+10)+'px'; tip.style.top=(e.clientY+10)+'px';
+        tip.textContent = (nameByAbbrev[cls]||cls.toUpperCase())+': '+(n!=null?fmt(n)+' listed species':'no data');
+      });
+      p.addEventListener('mouseleave', function(){ tip.style.opacity=0; });
+    });
+    document.getElementById('map-scale').innerHTML = '<span>'+min+'</span>' + ramp.map(function(c){return '<span class="sw" style="background:'+c+'"></span>';}).join('') + '<span>'+max+' listed species</span>';
+
+    var top = byState.slice(0,15);
+    document.getElementById('state-top-list').innerHTML = top.map(function(r){
+      return '<div class="row"><span>'+esc(r.state)+'</span><b class="mono">'+fmt(r.count)+'</b></div>';
+    }).join('');
+  })();
+
+  // ---------- critical habitat ----------
+  (function(){
+    function parseAcres(m){
+      if(!m) return null;
+      var mm = /([\d,]+(?:\.\d+)?)\s*acres/.exec(m);
+      return mm ? parseFloat(mm[1].replace(/,/g,'')) : null;
+    }
+    var chCount = 0, rows = [];
+    species.forEach(function(s){
+      (s.critical_habitat||[]).forEach(function(ch){
+        chCount++;
+        var a = parseAcres(ch.measurement);
+        if(a) rows.push({a:a, cn:s.cn, url:ch.fr_url, date:ch.date});
+      });
+    });
+    document.getElementById('ch-count').textContent = fmt(chCount);
+    rows.sort(function(x,y){ return y.a-x.a; });
+    var top = rows.slice(0,10);
+    var max = top.length? top[0].a : 1;
+    document.getElementById('habitat-bars').innerHTML = top.map(function(r){
+      return '<div class="row"><div class="lab">'+esc(r.cn)+'</div><div class="track"><div class="fill" style="width:'+(100*r.a/max)+'%;background:'+cssvar('--accent')+'"></div></div><div class="n mono">'+fmt(Math.round(r.a))+' ac</div></div>';
+    }).join('');
+  })();
+
+  // ---------- five-year reviews ----------
+  (function(){
+    var outcomes = {};
+    var total = 0;
+    species.forEach(function(s){
+      (s.five_year_reviews||[]).forEach(function(r){
+        total++;
+        var key = /no change/i.test(r.outcome||'') ? 'No change in status'
+          : /extinct/i.test(r.outcome||'') ? 'Recommend delisting: extinct'
+          : /does not meet/i.test(r.outcome||'') ? 'Recommend delisting: doesn\'t qualify'
+          : /downlist/i.test(r.outcome||'') ? 'Recommend downlisting'
+          : /uplist/i.test(r.outcome||'') ? 'Recommend uplisting'
+          : 'Other / taxonomic';
+        outcomes[key] = (outcomes[key]||0)+1;
+      });
+    });
+    document.getElementById('fyr-count').textContent = fmt(total);
+    document.getElementById('fyr-nochange-pct').textContent = pct(outcomes['No change in status']||0, total);
+    var order = ['No change in status','Recommend downlisting','Recommend uplisting',"Recommend delisting: doesn't qualify",'Recommend delisting: extinct','Other / taxonomic'];
+    var max = Math.max.apply(null, order.map(function(k){return outcomes[k]||0;}));
+    document.getElementById('fyr-bars').innerHTML = order.map(function(k,i){
+      var n = outcomes[k]||0;
+      return '<div class="row"><div class="lab">'+k+'</div><div class="track"><div class="fill" style="width:'+(100*n/max)+'%;background:'+CAT[i%CAT.length]+'"></div></div><div class="n mono">'+fmt(n)+'</div></div>';
+    }).join('');
+  })();
+
+  // ---------- explorer ----------
+  (function(){
+    var groups = Array.from(new Set(species.map(function(s){return s.group;}))).sort();
+    var gsel = document.getElementById('f-group');
+    groups.forEach(function(g){ var o=document.createElement('option'); o.value=g; o.textContent=g; gsel.appendChild(o); });
+
+    var state = {q:'', group:'', status:'', agency:'', country:'', sortKey:'cn', sortDir:1, shown:150};
+    var qEl=document.getElementById('f-q'), gEl=document.getElementById('f-group'), sEl=document.getElementById('f-status'),
+        aEl=document.getElementById('f-agency'), cEl=document.getElementById('f-country');
+    [qEl,gEl,sEl,aEl,cEl].forEach(function(el){ el.addEventListener('input', function(){ readFilters(); state.shown=150; render(); }); });
+    function readFilters(){ state.q=qEl.value.trim().toLowerCase(); state.group=gEl.value; state.status=sEl.value; state.agency=aEl.value; state.country=cEl.value; }
+
+    document.querySelectorAll('table.explorer thead th').forEach(function(th){
+      th.addEventListener('click', function(){
+        var k = th.dataset.k;
+        if(state.sortKey===k) state.sortDir*=-1; else { state.sortKey=k; state.sortDir=1; }
+        render();
+      });
+    });
+    document.getElementById('show-more').addEventListener('click', function(){ state.shown+=150; render(); });
+
+    function filtered(){
+      return species.filter(function(s){
+        if(state.q && s.cn.toLowerCase().indexOf(state.q)<0 && s.sn.toLowerCase().indexOf(state.q)<0) return false;
+        if(state.group && s.group!==state.group) return false;
+        if(state.status){
+          if(state.status==='Delisted'){ if(s.status_category!=='Delisted') return false; }
+          else if(s.status!==state.status) return false;
+        }
+        if(state.agency && s.agency!==state.agency) return false;
+        if(state.country && s.country!==state.country) return false;
+        return true;
+      });
+    }
+
+    function render(){
+      var rows = filtered();
+      rows.sort(function(a,b){
+        var av=a[state.sortKey], bv=b[state.sortKey];
+        if(av==null) av=''; if(bv==null) bv='';
+        return (av>bv?1:av<bv?-1:0)*state.sortDir;
+      });
+      document.getElementById('explorer-count').textContent = 'Showing '+Math.min(state.shown,rows.length)+' of '+fmt(rows.length)+' matching entities ('+fmt(species.length)+' total)';
+      var body = document.getElementById('explorer-body');
+      var slice = rows.slice(0, state.shown);
+      body.innerHTML = slice.map(function(s,i){ return rowHtml(s,i); }).join('');
+      document.getElementById('show-more').style.display = rows.length>state.shown ? '' : 'none';
+      body.querySelectorAll('tr.r').forEach(function(tr){
+        tr.addEventListener('click', function(){
+          var idx = +tr.dataset.i;
+          var det = document.getElementById('det-'+idx);
+          if(det){ det.remove(); return; }
+          var s = slice[idx];
+          var row = document.createElement('tr');
+          row.className='detail'; row.id='det-'+idx;
+          row.innerHTML = '<td colspan="6"><div class="detail-inner">'+detailHtml(s)+'</div></td>';
+          tr.parentNode.insertBefore(row, tr.nextSibling);
+        });
+      });
+    }
+
+    function rowHtml(s,i){
+      return '<tr class="r" data-i="'+i+'"><td>'+esc(s.cn)+'</td><td class="sn">'+esc(s.sn)+'</td><td>'+esc(s.group)+'</td>'+
+        '<td>'+esc(s.status_category==='Delisted' ? 'Delisted ('+s.status+')' : s.status)+'</td><td>'+esc(s.agency)+'</td><td class="mono">'+esc(s.listing_date||'—')+'</td></tr>';
+    }
+
+    function detailHtml(s){
+      var kv = '<div class="kv"><b>Population</b><span>'+esc(s.pop||'Wherever found')+'</span>'+
+        '<b>Range</b><span>'+esc(s.country)+(s.is_foreign?' (foreign)':'')+'</span>'+
+        '<b>Listed</b><span>'+esc(s.listing_date||'not recorded')+'</span>';
+      if(s.delisting) kv += '<b>Delisted</b><span>'+esc(s.delisting.date||'—')+' — '+esc(s.delisting.reason||'')+'</span>';
+      if(s.recovery_priority) kv += '<b>Recovery priority</b><span>'+esc(s.recovery_priority)+'</span>';
+      kv += '<b>ECOS profile</b><span><a href="'+esc(s.profile_url)+'" target="_blank" rel="noopener">ecos.fws.gov &#8599;</a></span></div>';
+
+      var blocks = kv;
+      if(s.reclassifications && s.reclassifications.length){
+        blocks += '<b style="display:block;margin-top:6px">Reclassification history</b><ul>'+s.reclassifications.map(function(r){
+          return '<li>'+esc(r.date||'—')+': moved to '+(r.to_status==='E'?'Endangered':'Threatened')+'</li>';
+        }).join('')+'</ul>';
+      }
+      if(s.five_year_reviews && s.five_year_reviews.length){
+        blocks += '<b style="display:block;margin-top:6px">Five-year reviews ('+s.five_year_reviews.length+')</b><ul>'+s.five_year_reviews.slice(-5).reverse().map(function(r){
+          return '<li>'+esc(r.completed||'—')+': '+esc(r.outcome||'')+(r.doc_url?' — <a href="'+esc(r.doc_url)+'" target="_blank" rel="noopener">document</a>':'')+'</li>';
+        }).join('')+'</ul>';
+      }
+      if(s.critical_habitat && s.critical_habitat.length){
+        blocks += '<b style="display:block;margin-top:6px">Critical habitat ('+s.critical_habitat.length+')</b><ul>'+s.critical_habitat.slice(0,5).map(function(r){
+          return '<li>'+esc(r.date||'—')+', '+esc(r.status||'')+(r.measurement?': '+esc(r.measurement):'')+(r.fr_url?' — <a href="'+esc(r.fr_url)+'" target="_blank" rel="noopener">Federal Register</a>':'')+'</li>';
+        }).join('')+'</ul>';
+      }
+      if(s.recovery_plans && s.recovery_plans.length){
+        blocks += '<b style="display:block;margin-top:6px">Recovery plans ('+s.recovery_plans.length+')</b><ul>'+s.recovery_plans.slice(0,5).map(function(r){
+          return '<li>'+esc(r.date||'—')+' &mdash; <a href="'+esc(r.doc_url)+'" target="_blank" rel="noopener">'+esc(r.title||'document')+'</a> ('+esc(r.stage||'')+')</li>';
+        }).join('')+'</ul>';
+      }
+      return blocks;
+    }
+
+    readFilters();
+    render();
+  })();
+}
+</script>
+</body>
+</html>
