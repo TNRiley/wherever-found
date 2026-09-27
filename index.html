@@ -210,6 +210,7 @@ footer .src{margin-bottom:4px;}
 .qp-crumb a:hover,.qp-crumb a:focus-visible{opacity:1;text-decoration:underline;text-underline-offset:3px}
 .qp-crumb .qp-sep{opacity:.34}
 .qp-crumb .qp-here{opacity:.44;text-transform:uppercase}
+.qp-crumb .qp-visits{margin-left:auto;opacity:.44;font-variant-numeric:tabular-nums}
 @media(max-width:600px){.qp-crumb{padding:8px 14px;font-size:11px}}
 @media print{.qp-crumb{display:none}}
 </style>
@@ -218,6 +219,22 @@ footer .src{margin-bottom:4px;}
   <span class="qp-sep">/</span>
   <span class="qp-here">Wherever Found</span>
 </nav>
+<script>
+(function(){
+  var nav = document.querySelector(".qp-crumb"); if (!nav) return;
+  var live = /\.github\.io$/i.test(location.hostname);
+  fetch("https://abacus.jasoncameron.dev/" + (live ? "hit" : "get") + "/tnriley-shelf-e76198/wherever-found", {cache: "no-store"})
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      if (!d || typeof d.value !== "number") return;
+      var s = document.createElement("span");
+      s.className = "qp-visits";
+      s.textContent = d.value.toLocaleString("en-US") + (d.value === 1 ? " visit" : " visits");
+      nav.appendChild(s);
+    })
+    .catch(function(){});
+})();
+</script>
 <!-- /catalog-link -->
 
 <div class="topbar">
